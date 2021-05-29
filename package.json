@@ -1,0 +1,39 @@
+{
+  "name": "l8",
+  "version": "0.0.1",
+  "description": "Lightweight core library for JavaScript projects",
+  "main": "src/l8.js",
+  "type" : "module",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/l8js/l8.git"
+  },
+  "keywords": [
+    "l8"
+  ],
+  "author": "Thorsten Suckow-Homberg",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/l8js/l8/issues"
+  },
+  "homepage": "https://github.com/l8js/l8#readme",
+  "devDependencies": {
+    "@babel/core": "^7.14.3",
+    "@babel/preset-env": "^7.14.4",
+    "babel-jest": "^27.0.1",
+    "babel-loader": "^8.2.2",
+    "eslint": "^7.27.0",
+    "jest": "^27.0.1",
+    "webpack": "^5.38.1",
+    "webpack-cli": "^4.7.0"
+  },
+  "dependencies": {
+    "yarn": "^1.22.10"
+  }
+}
