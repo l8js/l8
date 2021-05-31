@@ -14,6 +14,8 @@
         "test": true,
         "require": true,
         "expect": true,
+        "beforeEach": true,
+        "afterEach": true,
         "StartTest": true,
         "jest" : true
     },

@@ -23,7 +23,25 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-export {default as BlockquoteTransformer} from "./BlockquoteTransformer.js";
-export {default  as EmailAddressTransformer} from "./EmailAddressTransformer.js";
-export {default  as HyperlinkTransformer} from "./HyperlinkTransformer.js";
-export {default  as LineBreakTransformer} from "./LineBreakTransformer.js";
+
+/**
+ * Interface for classes implementing template compiler functionality
+ */
+export default class {
+
+    /**
+     * Compiles the specified txt and returns an instance of CompiledTpl.
+     * Implementing classes should take care of properly parsing the txt for the allowed keys and
+     * void any other keys detected in the template.
+     *
+     * @param {String} txt
+     * @param {Array} keys An array of keys representing allowed template variables, optional.
+     *
+     * @return {CompiledTpl}
+     *
+     * @throws if any error during compiling occurs
+     */
+    compile (txt, keys) {}
+
+
+}

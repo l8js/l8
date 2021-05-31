@@ -23,7 +23,53 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-export {default as BlockquoteTransformer} from "./BlockquoteTransformer.js";
-export {default  as EmailAddressTransformer} from "./EmailAddressTransformer.js";
-export {default  as HyperlinkTransformer} from "./HyperlinkTransformer.js";
-export {default  as LineBreakTransformer} from "./LineBreakTransformer.js";
+import {default as CompiledTpl} from "../CompiledTpl.js";
+import * as sugar from "../../core/sugar.js";
+
+
+/**
+ * Compiled Template representation for javaScript-Strings.
+ *
+ */
+export default class extends CompiledTpl {
+
+    /**
+     * @var fn
+     * @type Function
+     * @private
+     */
+
+    /**
+     * Constructor.
+     *
+     * @param {Function} fn The internal representation of the compiled template wrapped in a function.
+     * @param {Array} keys allowed keys as passed from the compiler
+     *
+     * @throws if fn is not a function
+     */
+    constructor (fn) {
+        super();
+        if (!sugar.isFunction(fn)) {
+            throw new Error("\"fn\" must be of type \"function\"");
+        }
+
+        this.fn = fn;
+    }
+
+
+    /**
+     * @inheritdoc
+     */
+    render (data) {
+        const me = this;
+
+        try {
+            return me.fn.call({}, data);
+        } catch (e) {
+            throw new Error(`rendering "data" failed with message ${e.message}`);
+        }
+
+    }
+
+
+}

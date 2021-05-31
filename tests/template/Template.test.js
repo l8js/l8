@@ -1,7 +1,7 @@
 /**
- * l8.js
- * l8
- * Copyright (C) 2021 Thorsten Suckow-Homberg https://github.com/l8js/l8
+ * coon.js
+ * lib-cn_core
+ * Copyright (C) 2021 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_core
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -23,7 +23,35 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-export {default as BlockquoteTransformer} from "./BlockquoteTransformer.js";
-export {default  as EmailAddressTransformer} from "./EmailAddressTransformer.js";
-export {default  as HyperlinkTransformer} from "./HyperlinkTransformer.js";
-export {default  as LineBreakTransformer} from "./LineBreakTransformer.js";
+import {default as Template} from "../../src/template/Template.js";
+
+let inst ;
+
+const API = ["render"];
+
+// +----------------------------------------------------------------------------
+// |                    =~. setup / teardown .~=
+// +----------------------------------------------------------------------------
+
+beforeEach(() => {
+    inst = new Template;
+});
+
+
+afterEach(() => {
+    inst = null;
+});
+
+
+// +----------------------------------------------------------------------------
+// |                    =~. Tests .~=
+// +----------------------------------------------------------------------------
+
+test("functionality", () => {
+    expect(inst).toBeInstanceOf(Template);
+    API.forEach(fn => {
+        expect(inst[fn]).toBeDefined();
+    });
+});
+
+

@@ -1,5 +1,6 @@
 /**
  * l8.js
+ * l8
  * Copyright (C) 2021 Thorsten Suckow-Homberg https://github.com/l8js/l8
  *
  * Permission is hereby granted, free of charge, to any person

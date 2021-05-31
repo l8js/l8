@@ -23,7 +23,23 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-export {default as BlockquoteTransformer} from "./BlockquoteTransformer.js";
-export {default  as EmailAddressTransformer} from "./EmailAddressTransformer.js";
-export {default  as HyperlinkTransformer} from "./HyperlinkTransformer.js";
-export {default  as LineBreakTransformer} from "./LineBreakTransformer.js";
+
+/**
+ * Interface for Compiled Templates.
+ *
+ */
+export default class {
+
+    /**
+     * Replaces keys from data found in this compiled template with their appropriate values
+     * and returns the string representation of this.
+     *
+     * @param {Object} data
+     *
+     * @return {String}
+     *
+     * @throws if any error during the rendering process occurs
+     */
+    render (data) {}
+
+}
