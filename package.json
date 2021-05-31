@@ -1,6 +1,6 @@
 {
-  "name": "l8",
-  "version": "0.0.1",
+  "name": "@l8js/l8",
+  "version": "0.0.1b",
   "description": "Lightweight core library for JavaScript projects",
   "main": "src/l8.js",
   "type": "module",
