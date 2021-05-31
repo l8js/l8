@@ -1,3 +1,3 @@
-import * as l8 from "./namespace.js";
+import * as l8 from "./.njs";
 
 export {l8};

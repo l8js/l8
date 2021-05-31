@@ -22,7 +22,7 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import * as l8 from "./sweetener.js";
+import * as l8 from "./sugar.js";
 
 /**
  * Proxy for objects to create fluent interfaces out of async methods.

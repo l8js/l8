@@ -1,5 +1,6 @@
 /**
  * l8.js
+ * l8
  * Copyright (C) 2021 Thorsten Suckow-Homberg https://github.com/l8js/l8
  *
  * Permission is hereby granted, free of charge, to any person
@@ -22,46 +23,40 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-const l8 = require("../../src/core/sweetener");
-
 /**
- * isObject
+ * Mocks the window.XmlHttpRequest-object.
+ *
+ * @example
+ *   import RequestMock from "./XmlHttpRequest.js";
+ *   const response = {
+ *       status : 200,
+ *       responseText : "foobar";
+ *   }
+ *   let mock = RequestMock.respondWith(response)
+ *   mock.load(); // "mock.throws()" to force onerror
+ *
+ *
  */
-test("isObject", () => {
-    expect(l8.isObject({})).toBe(true);
-    expect(l8.isObject("")).toBe(false);
-});
+export default class {
 
+    static respondWith (obj) {
+        const xhrMockObj = {
+            open: jest.fn(),
+            send: jest.fn(),
+            setRequestHeader: jest.fn(),
+            load : () => {
+                return xhrMockObj.onload({target : obj});
+            },
+            throws : () => {
+                return xhrMockObj.onerror({target : obj});
+            }
+        };
 
-/**
- * isFunction
- */
-test("isFunction", () => {
-    expect(l8.isFunction({})).toBe(false);
-    expect(l8.isFunction("")).toBe(false);
-    expect(l8.isFunction(() => {})).toBe(true);
-    expect(l8.isFunction(function (){})).toBe(true);
-});
+        const xhrMockClass = () => xhrMockObj;
 
-/**
- * is.a
- */
-test("is().a()", () => {
-    expect(l8.is("foo").a("string")).toBe(true);
-    expect(l8.is("foo").a("function")).toBe(false);
-    expect(l8.is({}).a("object")).toBe(true);
-    expect(l8.is(1).a("number")).toBe(true);
-});
+        window.XMLHttpRequest = jest.fn().mockImplementation(xhrMockClass);
 
-/**
- * is.of
- */
-test("is().of()", () => {
-    let c = class {
-    };
-    expect(l8.is("foo").of("string")).toBe(false);
-    expect(l8.is(new c).of(c)).toBe(true);
-    expect(l8.is("foo").of("function")).toBe(false);
-    expect(l8.is({}).of(Object)).toBe(true);
-    expect(l8.is(1).of(Number)).toBe(false);
-});
+        return xhrMockObj ;
+    }
+
+}

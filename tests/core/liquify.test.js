@@ -22,7 +22,7 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-const l8 = require("../../src/core/liquify");
+import * as l8 from "../../src/core/liquify.js";
 
 
 const source = {
@@ -52,9 +52,6 @@ const source = {
 };
 
 
-//
-//sanitize
-//
 test("sanitize", async () => {
 
     expect(
@@ -66,9 +63,6 @@ test("sanitize", async () => {
 });
 
 
-//
-// liquifiy()
-//
 test("liquify()", () => {
 
     let makeLiquid, p;
@@ -93,9 +87,6 @@ test("liquify()", () => {
 });
 
 
-//
-// liquify(foo())
-//
 test("liquify(source).foo(true)", async () => {
 
     // Function
@@ -105,9 +96,6 @@ test("liquify(source).foo(true)", async () => {
 });
 
 
-//
-// liquify(source).foo().bar(true)
-//
 test("liquify(source).foo().bar(true)", async () => {
 
     // Function
@@ -117,9 +105,6 @@ test("liquify(source).foo().bar(true)", async () => {
 });
 
 
-//
-// liquify(source).foo().bar().snafu(true)
-//
 test("liquify(source).foo().bar().snafu(true)", async () => {
 
     // Function
@@ -129,9 +114,6 @@ test("liquify(source).foo().bar().snafu(true)", async () => {
 });
 
 
-//
-// liquify(source).foo().bar().snafu()
-//
 test("liquify(source).foo().bar().snafu()", async () => {
 
     // Function

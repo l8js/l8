@@ -22,6 +22,13 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+/**
+ *
+ * @param target
+ * @return {boolean}
+ */
+export const isString = target => typeof target === "string";
+
 
 /**
  * 
@@ -37,6 +44,19 @@ export const isObject = target => typeof target === "object";
  */
 export const isFunction = target => typeof target === "function";
 
+/**
+ *
+ * @param target
+ * @return {boolean}
+ */
+export const isNumber = target => typeof target === "number";
+
+/**
+ *
+ * @param target
+ * @return {any}
+ */
+export const isArray = target =>  Array.isArray ? Array.isArray(target) : Object.prototype.toString.call(target) === "[object Array]";
 
 /**
  * 
