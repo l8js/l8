@@ -15,7 +15,7 @@
         "require": true,
         "expect": true,
         "StartTest": true,
-        "Ext": true
+        "jest" : true
     },
     "ignorePatterns" : [
         "*config*.js",

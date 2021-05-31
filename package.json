@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Lightweight core library for JavaScript projects",
   "main": "src/l8.js",
-  "type" : "module",
+  "type": "module",
   "directories": {
     "test": "tests"
   },
@@ -28,12 +28,16 @@
     "@babel/preset-env": "^7.14.4",
     "babel-jest": "^27.0.1",
     "babel-loader": "^8.2.2",
+    "babel-preset-flow": "^6.23.0",
     "eslint": "^7.27.0",
     "jest": "^27.0.1",
     "webpack": "^5.38.1",
     "webpack-cli": "^4.7.0"
   },
   "dependencies": {
+    "latest": "^0.2.0",
+    "n": "^7.2.2",
+    "nodejs": "^16.2.0",
     "yarn": "^1.22.10"
   }
 }

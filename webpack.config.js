@@ -1,7 +1,7 @@
-const webpack = require('webpack');
-const path = require('path');
+import path from 'path';
 
-module.exports = {
+export default {
+
     mode : "none",
     entry: {
         main: './src/l8.js'
@@ -10,10 +10,11 @@ module.exports = {
         outputModule: true,
     },
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve('dist'),
         filename: 'l8.bundle.js',
         library: {
-             type: 'module'
+            type: 'module'
         },
     }
+
 }

@@ -1,8 +1,9 @@
-module.exports = {
-    "testEnvironment": "node",
+export default {
+    "testEnvironment": "jsdom",
     "verbose": true,
     "moduleFileExtensions": [
         "js",
+        "mjs",
         "ts",
         "tsx",
         "json",
@@ -13,4 +14,4 @@ module.exports = {
         "/node_modules/"
     ],
     "collectCoverage": false
-}
+};
