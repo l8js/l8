@@ -27,11 +27,8 @@
     "@babel/core": "^7.14.3",
     "@babel/preset-env": "^7.14.4",
     "babel-jest": "^27.0.1",
-    "babel-loader": "^8.2.2",
-    "babel-preset-flow": "^6.23.0",
     "eslint": "^7.27.0",
     "jest": "^27.0.1",
-    "webpack": "^5.38.1",
-    "webpack-cli": "^4.7.0"
+    "rollup": "^2.50.5"
   }
 }
