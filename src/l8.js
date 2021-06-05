@@ -25,4 +25,4 @@
 
 import * as l8 from "./.l8js";
 
-export {l8};
+export {l8 as default};

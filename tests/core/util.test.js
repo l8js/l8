@@ -1,5 +1,6 @@
 /**
  * l8.js
+ * l8
  * Copyright (C) 2021 Thorsten Suckow-Homberg https://github.com/l8js/l8
  *
  * Permission is hereby granted, free of charge, to any person
@@ -27,6 +28,8 @@ import * as util from "../../src/core/util.js";
 
 test("unchain()", () => {
 
+    expect(util.nchn).toBe(util.unchain);
+
     const testMe = {1:{2:{3:{4:{5:"foo"}}}}};
 
     expect(util.unchain("1.2.3.4.5", testMe)).toBe("foo");
@@ -37,6 +40,9 @@ test("unchain()", () => {
     expect(util.unchain("1.2.3.4.5", testMe, "end")).toBe("foo");
     expect(util.unchain("1.2.8.4.5", testMe, "defaultValue")).toBe("defaultValue");
     expect(util.unchain("1.2.3.4.6", testMe, "defaultValue")).toBe("defaultValue");
+
+    expect(util.unchain("1.2.3.4.5", testMe, (value) => value.toUpperCase())).toBe("FOO");
+
 
 });
 
@@ -155,6 +161,9 @@ test("flip()", () => {
 
 test("chain()", () => {
 
+
+    expect(util.chn).toBe(util.chain);
+
     let obj = {};
     let res = util.chain("a.b.c.d", obj, "foo");
 
@@ -177,6 +186,22 @@ test("chain()", () => {
     expect(obj.pluginMap["foo.bar.snafu"]).toEqual([]);
     expect(obj.pluginMap["bar.snafu.foo"]).toBeUndefined();
 
+    ctrl = "foo.bar.snafu";
+    obj = {};
+    util.chain(ctrl, obj, (prop) => prop);
+    expect(obj.foo.bar.snafu).toBe(ctrl);
+
+    ctrl = ["foo.bar.snafu", "foo.bar.barfoo"];
+    obj = {};
+    util.chain(ctrl, obj, (prop) => prop);
+    expect(obj.foo.bar.snafu).toBe(ctrl[0]);
+    expect(obj.foo.bar.barfoo).toBe(ctrl[1]);
+
+    ctrl = ["foo.bar.snafu", "foo.bar.barfoo"];
+    obj = {};
+    util.chain(ctrl, obj, "m");
+    expect(obj.foo.bar.snafu).toBe("m");
+    expect(obj.foo.bar.barfoo).toBe("m");
 
 });
 

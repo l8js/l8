@@ -29,7 +29,7 @@
  * @return {boolean}
  */
 export const isString = target => typeof target === "string";
-
+export const iss = isString;
 
 /**
  * 
@@ -37,6 +37,7 @@ export const isString = target => typeof target === "string";
  * @return {boolean}
  */
 export const isObject = target => typeof target === "object";
+export const iso = isObject;
 
 /**
  * 
@@ -44,6 +45,7 @@ export const isObject = target => typeof target === "object";
  * @return {boolean}
  */
 export const isFunction = target => typeof target === "function";
+export const isf = isFunction;
 
 /**
  *
@@ -51,6 +53,7 @@ export const isFunction = target => typeof target === "function";
  * @return {boolean}
  */
 export const isNumber = target => typeof target === "number";
+export const isn = isNumber;
 
 /**
  *
@@ -58,6 +61,7 @@ export const isNumber = target => typeof target === "number";
  * @return {any}
  */
 export const isArray = target =>  Array.isArray ? Array.isArray(target) : Object.prototype.toString.call(target) === "[object Array]";
+export const isa = isArray;
 
 /**
  * 

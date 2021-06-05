@@ -1,8 +1,8 @@
 {
   "name": "@l8js/l8",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Lightweight core library for JavaScript projects",
-  "main": "src/l8.js",
+  "main": "dist/l8.runtime.esm.js",
   "type": "module",
   "directories": {
     "test": "tests"

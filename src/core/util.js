@@ -34,6 +34,7 @@ import * as core from "./sugar.js";
  * Creates an object chain on the target object and initializes it with
  * the defaultValue, if specified.
  * Returns the target object.
+ * The third argument can be a function that gets called with the chain's name created as its argument.
  *
  * @example
  *    let obj = {};
@@ -42,36 +43,64 @@ import * as core from "./sugar.js";
  *    // obj
  *    // { a : { b : {c : { d : "foo"}}}}
  *
- * @param {String} str
- * @param {Object} target
+ * This method lets you pass a list of properties as the first argument that will be chained.
+ * The third argument can be a function that gets called with each property upon chaining.
+ * The return value of this function is used as the value for the chained property.
+ * Otherwise, the third argument will be used as the value.
  *
- * @param defaultValue
+ * @example
+ * let obj = {};
+ *    coon.core.Util.chain(["a.b", "e.f"], obj, (chain) => console.log(chain.toUpperCase()));
+ *
+ *    // obj
+ *    // { a : { b : "B"}, {e : {f : "F"}}}
+ *
+ *
+ * @param {!(String|Array)} chains
+ * @param {Object} target
+ * @param {?(*|function)} defaultValue
+ *
+ * @return {Object} target
  */
-export const chain = function (str, target = {}, defaultValue = undefined) {
+export const chain = function (chains, target = {}, defaultValue = undefined) {
 
-    const keys = str.split(".");
+    chains = [].concat(chains);
 
-    const cr = function (obj, keys) {
+    chains.forEach((str) => {
+        /**
+         * @todo O(n) ?
+         */
+        const
+            keys = str.split("."),
+            cr = (obj, keys) => {
 
-        let key;
+            let key;
 
-        key = keys.shift();
-        if (!obj[key]) {
-            obj[key] = keys.length ? {} : defaultValue;
-        }
+            key = keys.shift();
+            if (!obj[key]) {
+                obj[key] = keys.length ? {} : (core.isFunction(defaultValue) ? defaultValue(str) : defaultValue) ;
+            }
 
-        if (keys.length) {
-            cr(obj[key], keys);
-        }
+            if (keys.length) {
+                cr(obj[key], keys);
+            }
 
-        return obj;
-    };
+            return obj;
+        };
 
-    cr(target, keys);
+        cr(target, keys);
+    });
+
+
 
     return target;
 };
 
+/**
+ * Alias for chain()
+ * @type {function(!(String|Array), Object=, ?(*|Function)=): Object}
+ */
+export const chn = chain;
 
 /**
  * Expects an Object and flips key/value/pairs.
@@ -126,9 +155,16 @@ export const purge = function (input, match= undefined) {
  *
  * @param {String} chain The object chain to resolve
  * @param {Object} scope The scope where the chain should be looked up
- * @param {Mixed} defaultValue a defaultValue to return in case the chain is not existing
+ * @param {(*|Function)} defaultValue a defaultValue to return in case the chain is not existing.
+ * if this argument is a function, the function gets called. If the chain existed, it will be called with the
+ * value of the chain, and the return value of this function is returned.
+ * @example
+ * const cb = value => value.toUpperCase(),
+ *      foo = { 1 : { 2 : { 3 : { 4 : 'bar'}}}};
  *
- * @return {<*>} undefined if either scope was not found or the chain could
+ *  coon.core.Util.unchain('1.2.3.4', foo, cb); // 'BAR'
+ *
+ * @return {*} undefined if either scope was not found or the chain could
  * not be resolved, otherwise the value found in [scope][chain]
  */
 export const unchain = function (chain, scope, defaultValue = undefined) {
@@ -140,12 +176,22 @@ export const unchain = function (chain, scope, defaultValue = undefined) {
         obj = obj[parts.shift()];
     }
 
+    if (core.isFunction(defaultValue)) {
+        return defaultValue(obj);
+    }
+
     if (obj === undefined) {
         return defaultValue;
     }
 
     return obj;
 };
+
+/**
+ * Alias for unchain()
+ * @type {function(!(String|Array), Object=, ?(*|Function)=): Object}
+ */
+export const nchn = unchain;
 
 
 /**
