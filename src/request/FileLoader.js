@@ -23,7 +23,7 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import {isString} from "../sugar.js";
+import {isString} from "../core/sugar.js";
 
 /**
  * ResourceRequestor-implementation using XmlHttpRequest api.

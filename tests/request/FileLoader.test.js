@@ -23,8 +23,8 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import FileLoader from "../../../src/core/request/FileLoader.js";
-import RequestMock from "../../__mocks__/XmlHttpRequest.js";
+import FileLoader from "../../src/request/FileLoader.js";
+import RequestMock from "../__mocks__/XmlHttpRequest.js";
 
 /**
  * Helper.

@@ -24,11 +24,11 @@
  */
 
 import {liquify} from "./liquify.js";
-
-export * as request from "./request/.l8js";
 export * from "./sugar.js";
-export * from "./util.js";
+export * from "./array.js";
 export * from "./object.js";
+export * from "./string.js";
+
 export {
     liquify
 };

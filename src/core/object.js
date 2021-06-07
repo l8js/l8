@@ -24,6 +24,7 @@
  */
 
 import * as l8 from "./sugar.js";
+import * as core from "./sugar";
 
 
 /**
@@ -46,7 +47,7 @@ import * as l8 from "./sugar.js";
  * @throws {Error} if target is not extensible, if "prop" is not a valid string or if a list of properties
  * is supplied, but no value-object.
  */
-export const lck = function (target, prop, value) {
+export const lock = function (target, prop, value) {
 
     if (!l8.isObject(target) || Object.isFrozen(target) || Object.isSealed(target)) {
         throw new Error("\"target\" must be an extensible object.");
@@ -86,3 +87,217 @@ export const lck = function (target, prop, value) {
 
     return target;
 };
+export const lck = lock;
+
+/**
+ * This callback is displayed as part of the Requester class.
+ * @callback visit~visitor
+ * @param {*} leaf
+ * @param {string} path
+ */
+
+/**
+ * Traverses an object and calls the passed function on each property.
+ *
+ * @example
+ *      let tree = {
+ *          node : {
+ *              node_a : {
+ *                  node : "foo"
+ *              }
+ *          },
+ *          node_c : "bar"
+ *      };
+ *
+ * l8.visit(tree, (leaf, path) => path; // changes the tree to
+ *
+ * @param {Object} target The target "tree" that should be visited.
+ * @param {visit~visitor} visitor - The callback that handles the response. The passed arguments to this functions
+ * are the value of the node and the path (string) to this node.
+ *
+ * @return {Object} target The visited target.
+ *
+ */
+export const visit = function (target, visitor) {
+
+    const traverse = (target, parentKey) => {
+        Object.entries(target).map(([key, property]) => {
+            const path = parentKey.concat(key);
+            target[key] = l8.iso(property) ? traverse(property, path) : visitor(property, path.join("."));
+        });
+        return target;
+    };
+
+    traverse(target, []);
+    return target;
+};
+export const vst = visit;
+
+
+/**
+ * Utilities
+ */
+
+
+/**
+ * Creates an object chain on the target object and initializes it with
+ * the defaultValue, if specified.
+ * Returns the target object.
+ * The third argument can be a function that gets called with the chain's name created as its argument.
+ *
+ * @example
+ *    let obj = {};
+ *    coon.core.Util.chain("a.b.c.d", obj, "foo");
+ *
+ *    // obj
+ *    // { a : { b : {c : { d : "foo"}}}}
+ *
+ * This method lets you pass a list of properties as the first argument that will be chained.
+ * The third argument can be a function that gets called with each property upon chaining.
+ * The return value of this function is used as the value for the chained property.
+ * Otherwise, the third argument will be used as the value.
+ *
+ * @example
+ * let obj = {};
+ *    coon.core.Util.chain(["a.b", "e.f"], obj, (chain) => console.log(chain.toUpperCase()));
+ *
+ *    // obj
+ *    // { a : { b : "B"}, {e : {f : "F"}}}
+ *
+ *
+ * @param {!(String|Array)} chains
+ * @param {Object} target
+ * @param {?(*|function)} defaultValue
+ *
+ * @return {Object} target
+ */
+export const chain = function (chains, target = {}, defaultValue = undefined) {
+
+    chains = [].concat(chains);
+
+    chains.forEach((str) => {
+        /**
+         * @todo O(n) ?
+         */
+        const
+            keys = str.split("."),
+            cr = (obj, keys) => {
+
+                let key;
+
+                key = keys.shift();
+                if (!obj[key]) {
+                    obj[key] = keys.length ? {} : (core.isFunction(defaultValue) ? defaultValue(str) : defaultValue) ;
+                }
+
+                if (keys.length) {
+                    cr(obj[key], keys);
+                }
+
+                return obj;
+            };
+
+        cr(target, keys);
+    });
+
+
+
+    return target;
+};
+
+/**
+ * Alias for chain()
+ * @type {function(!(String|Array), Object=, ?(*|Function)=): Object}
+ */
+export const chn = chain;
+
+/**
+ * Expects an Object and flips key/value/pairs.
+ *
+ *      @example
+ *      var foo = { 1 : "foo", 2 : "bar", 3 : "snafu"};
+ *
+ *      coon.core.Util.flip(foo); // {"bar" : 1, "bar": 2, "snafu" : 3}
+ *
+ * @param {Object} input
+ *
+ * @return {Object} a new object where the key/value pairs are flipped
+ */
+export const flip = function (input) {
+    /**
+     * no arrow with destruct assignment, see lib-cn_core#18
+     */
+    return Object.assign({}, ...Object.entries(input).map(function ([k, v]){ return {[v] : k};}));
+};
+
+
+/**
+ * Expects an Object and removes all the entries which equal to match.
+ *
+ *      @example
+ *      var foo = { 1 : "", 2 : "bar", 3 : ""};
+ *
+ *      coon.core.Util.purge(foo, ""); // {2 : "bar"}
+ *
+ * @param {Object} input
+ * @param {Mixed} match, defaults to undefined
+ *
+ * @return {Object} a new filtered object
+ */
+export const purge = function (input, match= undefined) {
+    /**
+     * no arrow with destruct assignment, see lib-cn_core#18
+     */
+    return Object.fromEntries(Object.entries(input).filter(function ([k, v]) {return v !== match;}));
+};
+
+
+/**
+ * Splits the specified string by looking for "." as separators and returns
+ * undefined if the evaluated property is not available, otherwise the value
+ * of the property.
+ *
+ *      @example
+ *      var foo = { 1 : { 2 : { 3 : { 4 : 'bar'}}}};
+ *
+ *      coon.core.Util.unchain('1.2.3.4', foo); // 'bar'
+ *
+ * @param {String} chain The object chain to resolve
+ * @param {Object} scope The scope where the chain should be looked up
+ * @param {(*|Function)} defaultValue a defaultValue to return in case the chain is not existing.
+ * if this argument is a function, the function gets called. If the chain existed, it will be called with the
+ * value of the chain, and the return value of this function is returned.
+ * @example
+ * const cb = value => value.toUpperCase(),
+ *      foo = { 1 : { 2 : { 3 : { 4 : 'bar'}}}};
+ *
+ *  coon.core.Util.unchain('1.2.3.4', foo, cb); // 'BAR'
+ *
+ * @return {*} undefined if either scope was not found or the chain could
+ * not be resolved, otherwise the value found in [scope][chain]
+ */
+export const unchain = function (chain, scope, defaultValue = undefined) {
+
+    var parts = chain.split("."),
+        obj   = scope;
+
+    while (obj !== undefined && parts.length) {
+        obj = obj[parts.shift()];
+    }
+
+    if (core.isFunction(defaultValue)) {
+        return defaultValue(obj);
+    }
+
+    if (obj === undefined) {
+        return defaultValue;
+    }
+
+    return obj;
+};
+
+/**
+ * Alias for unchain()
+ * @type {function(!(String|Array), Object=, ?(*|Function)=): Object}
+ */
+export const nchn = unchain;
