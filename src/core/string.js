@@ -69,7 +69,6 @@ export const replace = function (tokens, replace, target) {
     tokens  = [].concat(tokens);
     replace = !l8.iss(replace) ? [].concat(replace) : new Array(tokens.length).fill(replace);
 
-    let pass = 1;
     tokens.forEach((item, index) => {
         target = target.replace(new RegExp(escapeRegExp(item), "g"), replace[index] ?? "");
     });
@@ -99,7 +98,7 @@ export const unify = function (target, token) {
     }
 
     return target.split(token).filter(
-        (x, index, source) => index === 0 || index === source.length - 1 || x !== ''
+        (x, index, source) => index === 0 || index === source.length - 1 || x !== ""
     ).join(token);
 
 };
@@ -108,8 +107,8 @@ export const unify = function (target, token) {
 /**
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions#escaping
  */
-function escapeRegExp(string) {
-    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+function escapeRegExp (string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
 

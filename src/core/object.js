@@ -201,7 +201,6 @@ export const chain = function (chains, target = {}, defaultValue = undefined) {
     });
 
 
-
     return target;
 };
 
