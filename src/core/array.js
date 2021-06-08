@@ -172,3 +172,37 @@ export const createRange = function (start, end) {
 
 };
 
+/**
+ * Searches for the first entry in source. Looks up the key in source if it is an object and returns the first
+ * match found, otherwise iterates through the array and returns the first match.
+ *
+ * @example
+ *
+ *  l8.findFirst("bar", {foo : {}, bar : {snafu : ""}}; // returns the bar-object
+ *  l8.findFirst("bar", [{foo : {}}, {bar : {snafu : ""}}]; // returns the bar-object
+ *
+ * @param {String} key
+ * @param {(Array|cObject)} source
+ *
+ * @return {?*}
+ */
+export const findFirst = (key, source) => {
+
+    let match = null,
+        iso = l8.iso(source);
+
+    (l8.isa(source) ? source : iso ? Object.entries(source) : []).some(item => {
+
+        if (iso && item[0] === key) {
+            match = item[1];
+            return true;
+        } else if (l8.iso(item) && item[key] !== undefined) {
+            match = item[key];
+            return true;
+        }
+    });
+
+    return match;
+};
+export const ff = findFirst;
+

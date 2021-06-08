@@ -110,3 +110,16 @@ test("createRange()", () => {
         expect(l8.createRange.apply(null, test.value)).toEqual(test.expected);
     }
 });
+
+
+test("findFirst()", () => {
+
+    expect(l8.ff).toBe(l8.findFirst);
+
+    let obj = {foo : {}, bar : {snafu : ""}};
+    expect(l8.findFirst("bar", obj)).toBe(obj.bar);
+
+    let arr = [{foo : {}}, {bar : {snafu : ""}}];
+    expect(l8.findFirst("bar", arr)).toBe(arr[1].bar);
+
+});
