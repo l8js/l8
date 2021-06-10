@@ -24,8 +24,7 @@
  */
 
 import * as l8 from "./sugar.js";
-import * as core from "./sugar";
-
+import * as string from "./string.js";
 
 /**
  * Creates a none-configurable, none-writeable (list of) propert(y|ies) on the target object.
@@ -147,7 +146,7 @@ export const vst = visit;
  *
  * @example
  *    let obj = {};
- *    coon.core.Util.chain("a.b.c.d", obj, "foo");
+ *    l8.chain("a.b.c.d", obj, "foo");
  *
  *    // obj
  *    // { a : { b : {c : { d : "foo"}}}}
@@ -159,7 +158,7 @@ export const vst = visit;
  *
  * @example
  * let obj = {};
- *    coon.core.Util.chain(["a.b", "e.f"], obj, (chain) => console.log(chain.toUpperCase()));
+ *    l8.chain(["a.b", "e.f"], obj, (chain) => console.log(chain.toUpperCase()));
  *
  *    // obj
  *    // { a : { b : "B"}, {e : {f : "F"}}}
@@ -187,7 +186,7 @@ export const chain = function (chains, target = {}, defaultValue = undefined) {
 
                 key = keys.shift();
                 if (!obj[key]) {
-                    obj[key] = keys.length ? {} : (core.isFunction(defaultValue) ? defaultValue(str) : defaultValue) ;
+                    obj[key] = keys.length ? {} : (l8.isFunction(defaultValue) ? defaultValue(str) : defaultValue) ;
                 }
 
                 if (keys.length) {
@@ -216,7 +215,7 @@ export const chn = chain;
  *      @example
  *      var foo = { 1 : "foo", 2 : "bar", 3 : "snafu"};
  *
- *      coon.core.Util.flip(foo); // {"bar" : 1, "bar": 2, "snafu" : 3}
+ *      l8.flip(foo); // {"bar" : 1, "bar": 2, "snafu" : 3}
  *
  * @param {Object} input
  *
@@ -236,7 +235,7 @@ export const flip = function (input) {
  *      @example
  *      var foo = { 1 : "", 2 : "bar", 3 : ""};
  *
- *      coon.core.Util.purge(foo, ""); // {2 : "bar"}
+ *      l8.purge(foo, ""); // {2 : "bar"}
  *
  * @param {Object} input
  * @param {Mixed} match, defaults to undefined
@@ -259,7 +258,7 @@ export const purge = function (input, match= undefined) {
  *      @example
  *      var foo = { 1 : { 2 : { 3 : { 4 : 'bar'}}}};
  *
- *      coon.core.Util.unchain('1.2.3.4', foo); // 'bar'
+ *      l8.unchain('1.2.3.4', foo); // 'bar'
  *
  * @param {String} chain The object chain to resolve
  * @param {Object} scope The scope where the chain should be looked up
@@ -270,7 +269,7 @@ export const purge = function (input, match= undefined) {
  * const cb = value => value.toUpperCase(),
  *      foo = { 1 : { 2 : { 3 : { 4 : 'bar'}}}};
  *
- *  coon.core.Util.unchain('1.2.3.4', foo, cb); // 'BAR'
+ *  l8.unchain('1.2.3.4', foo, cb); // 'BAR'
  *
  * @return {*} undefined if either scope was not found or the chain could
  * not be resolved, otherwise the value found in [scope][chain]
@@ -284,7 +283,7 @@ export const unchain = function (chain, scope, defaultValue = undefined) {
         obj = obj[parts.shift()];
     }
 
-    if (core.isFunction(defaultValue)) {
+    if (l8.isFunction(defaultValue)) {
         return defaultValue(obj);
     }
 
@@ -300,3 +299,55 @@ export const unchain = function (chain, scope, defaultValue = undefined) {
  * @type {function(!(String|Array), Object=, ?(*|Function)=): Object}
  */
 export const nchn = unchain;
+
+/**
+ * Lets you specify a regular expression to make sure only those
+ * keys are assigned from source to target that match the expression.
+ *
+ * @example
+ *     l8.assign({}, {"foo": "bar"}, [{"snafu" : "foobar", "key": "value"}, /(?!(snafu))^/g]);
+ *     // results in {"foo": "bar", "key": "value"}
+ *
+ *      l8.assign({}, {"foo": "bar"}, [{"snafu" : "foobar", "key": "value", "some": "obj"}, "snafu", "key"]);
+ *     // results in {"foo": "bar", "some": "obj"}
+ *
+ *
+ * @param {!Object} target The target object to assign tto
+ * @param {...(Object|[Object, (RegExp|...String])} The objects to use for assigning. If an array is submitted, the first
+ * index is the object source to assign from, and the second argument ist the regular expression that must match
+ * the object keys to use for assignment. If there is no RegExp as a second argument but instead a string, this string will
+ * be used for comparison. Can also be an arbitrary number of strings. All the keys not strict equaling to the submitted
+ * arguments will then be assigned their values to target.
+ *
+ * @return {Object} target
+ */
+export const assign = function (target) {
+
+    let sources = Array.prototype.slice.call(arguments, 1);
+
+    sources = sources.map( source => {
+
+        if (l8.isPlainObject(source)) {
+            return source;
+        }
+
+
+        if (l8.isArray(source)) {
+            const [obj, ...args] = source,
+                regexp = args[0];
+
+            return Object.fromEntries(
+                Object.entries(obj).filter(entry => {
+                    let key = entry[0];
+                    if (l8.isrx(regexp)) {
+                        return key.match(regexp) !== null;
+                    } else {
+                        return string.isNot.apply(string, [key].concat(args));
+                    }
+                })
+            );
+        }
+    });
+
+    return Object.assign(target, ...sources);
+};

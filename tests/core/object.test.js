@@ -204,3 +204,19 @@ test("chain()", () => {
 
 });
 
+
+test("assign()", () => {
+
+    expect(l8.assign({}, {"foo": "bar"}, [{"snafu" : "foobar", "key": "value"}, /(?!(snafu))^/gm])).toEqual(
+        {"foo": "bar", "key": "value"}
+    );
+
+    expect(l8.assign({}, {"foo": "bar"}, [{"snafu" : "foobar", "foobar" :  {some: "obj"}, "key": "value"}, /(?!(snafu|foobar))^/gm])).toEqual(
+        {"foo": "bar", "key": "value"}
+    );
+
+    expect(l8.assign({}, {"foo": "bar"}, [{"snafu" : "foobar", "foobar" :  {some: "obj"}, "key": "value"}, "snafu", "foobar"])).toEqual(
+        {"foo": "bar", "key": "value"}
+    );
+
+});
