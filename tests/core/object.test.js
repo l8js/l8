@@ -166,9 +166,15 @@ test("chain()", () => {
     let obj = {};
     let res = l8.chain("a.b.c.d", obj, "foo");
 
+
     expect(res).toBe(obj);
 
     expect(res).toEqual({ a : { b : {c : { d : "foo"}}}} );
+    res = l8.chain("a.b.c.d", obj, "bar");
+    expect(res).toEqual({ a : { b : {c : { d : "foo"}}}} );
+    res = l8.chain("a.b.c.d", obj, "bar", true);
+    expect(res).toEqual({ a : { b : {c : { d : "bar"}}}} );
+
 
     res = l8.chain("a.b.c.d", {"a" : {"b" : {}}}, "bar");
     expect(res).toEqual({ a : { b : {c : { d : "bar"}}}} );

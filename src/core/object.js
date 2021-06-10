@@ -143,6 +143,8 @@ export const vst = visit;
  * the defaultValue, if specified.
  * Returns the target object.
  * The third argument can be a function that gets called with the chain's name created as its argument.
+ * Overrides any value found on the end of the chain of the object if override is set to true and the value
+ * exists.
  *
  * @example
  *    let obj = {};
@@ -167,10 +169,11 @@ export const vst = visit;
  * @param {!(String|Array)} chains
  * @param {Object} target
  * @param {?(*|function)} defaultValue
+ * @param {Boolean} [override=false]
  *
  * @return {Object} target
  */
-export const chain = function (chains, target = {}, defaultValue = undefined) {
+export const chain = function (chains, target = {}, defaultValue = undefined, override = false) {
 
     chains = [].concat(chains);
 
@@ -185,7 +188,8 @@ export const chain = function (chains, target = {}, defaultValue = undefined) {
                 let key;
 
                 key = keys.shift();
-                if (!obj[key]) {
+
+                if (!obj[key] || (override === true && !keys.length)) {
                     obj[key] = keys.length ? {} : (l8.isFunction(defaultValue) ? defaultValue(str) : defaultValue) ;
                 }
 
@@ -222,15 +226,12 @@ export const chn = chain;
  * @return {Object} a new object where the key/value pairs are flipped
  */
 export const flip = function (input) {
-    /**
-     * no arrow with destruct assignment, see lib-cn_core#18
-     */
-    return Object.assign({}, ...Object.entries(input).map(function ([k, v]){ return {[v] : k};}));
+    return Object.assign({}, ...Object.entries(input).map(([k, v]) =>  ({[v] : k})));
 };
 
 
 /**
- * Expects an Object and removes all the entries which equal to match.
+ * Expects an Object and removes all the entries which strict equal to match.
  *
  *      @example
  *      var foo = { 1 : "", 2 : "bar", 3 : ""};
@@ -243,10 +244,7 @@ export const flip = function (input) {
  * @return {Object} a new filtered object
  */
 export const purge = function (input, match= undefined) {
-    /**
-     * no arrow with destruct assignment, see lib-cn_core#18
-     */
-    return Object.fromEntries(Object.entries(input).filter(function ([k, v]) {return v !== match;}));
+    return Object.fromEntries(Object.entries(input).filter(([, v]) => v !== match));
 };
 
 
