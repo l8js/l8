@@ -105,6 +105,30 @@ export const unify = function (target, token) {
 
 
 /**
+ * Returns true if the specified string is not any of the passed arguments. Matches are strict.
+ *
+ * @example
+ *  l8.isNot("string", "string"); // false
+ *  l8.isNot("string", "String"); // true
+ *  l8.isNot("string", "foo", "bar"); // true
+ *  l8.isNot("string", "foo", "bar", "string"); // false
+ *
+ * @param {String} target
+ * @param {...String} excludes
+ *
+ * @return {Boolean}
+ */
+export const isNot = function (target) {
+
+    const
+        expr = "(?!(" + Array.prototype.slice.call(arguments, 1).join("|") + "))^",
+        regex = new RegExp(expr, "g");
+
+    return target.match(regex) !== null;
+};
+
+
+/**
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions#escaping
  */
 function escapeRegExp (string) {

@@ -58,3 +58,11 @@ test("unify()", () => {
     expect( l8.unify("//foo////bar/////c/a//", "/")).toBe("/foo/bar/c/a/");
     expect( l8.unify("/foo/bar/////c/a/", "/")).toBe("/foo/bar/c/a/");
 });
+
+
+test("isNot()", () => {
+    expect(l8.isNot("string", "string")).toBe(false);
+    expect(l8.isNot("string", "String")).toBe(true);
+    expect(l8.isNot("string", "foo", "bar")).toBe(true);
+    expect(l8.isNot("string", "foo", "bar", "string")).toBe(false);
+});
