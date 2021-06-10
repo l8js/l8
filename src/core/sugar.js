@@ -39,6 +39,18 @@ export const iss = isString;
 export const isObject = target => typeof target === "object";
 export const iso = isObject;
 
+
+/**
+ *
+ * @param target
+ * @return {boolean}
+ */
+export const isPlainObject = target => typeof target === "object" &&
+                                       Object.prototype.toString.call(target) === "[object Object]" &&
+                                       target.constructor === Object;
+export const ispo = isPlainObject;
+
+
 /**
  * 
  * @param target
@@ -62,6 +74,14 @@ export const isn = isNumber;
  */
 export const isArray = target =>  Array.isArray ? Array.isArray(target) : Object.prototype.toString.call(target) === "[object Array]";
 export const isa = isArray;
+
+/**
+ *
+ * @param target
+ * @return {any}
+ */
+export const isRegExp = target => target instanceof RegExp;
+export const isrx = isRegExp;
 
 /**
  * 

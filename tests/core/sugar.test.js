@@ -40,6 +40,14 @@ test("isObject", () => {
 });
 
 
+test("isPlainObject", () => {
+    expect(l8.ispo).toBe(l8.isPlainObject);
+    expect(l8.isPlainObject({})).toBe(true);
+    expect(l8.isPlainObject([])).toBe(false);
+    expect(l8.isPlainObject(new Function())).toBe(false);
+});
+
+
 test("isFunction", () => {
     expect(l8.isf).toBe(l8.isFunction);
     expect(l8.isFunction({})).toBe(false);
@@ -79,4 +87,11 @@ test("isArray", () => {
     expect(l8.isa).toBe(l8.isArray);
     expect(l8.isArray({})).toBe(false);
     expect(l8.isArray([])).toBe(true);
+});
+
+
+test("isRegExp", () => {
+    expect(l8.isrx).toBe(l8.isRegExp);
+    expect(l8.isRegExp({})).toBe(false);
+    expect(l8.isRegExp(/foo/)).toBe(true);
 });
