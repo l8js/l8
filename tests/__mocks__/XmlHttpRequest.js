@@ -27,36 +27,29 @@
  * Mocks the window.XmlHttpRequest-object.
  *
  * @example
- *   import RequestMock from "./XmlHttpRequest.js";
+ *   import {createXmlHttpRequestMock} from "XmlHttpRequest.js";
  *   const response = {
  *       status : 200,
  *       responseText : "foobar";
  *   }
- *   let mock = RequestMock.respondWith(response)
- *   mock.load(); // "mock.throws()" to force onerror
- *
+ *   let mock = createXmlHttpRequestMock(response); // returns the mock
  *
  */
-export default class {
+export function createXmlHttpRequestMock (response) {
 
-    static respondWith (obj) {
-        const xhrMockObj = {
-            open: jest.fn(),
-            send: jest.fn(),
-            setRequestHeader: jest.fn(),
-            load : () => {
-                return xhrMockObj.onload({target : obj});
-            },
-            throws : () => {
-                return xhrMockObj.onerror({target : obj});
+
+    const mockClass = {
+        throwErrror : false,
+        open : jest.fn(),
+        send : function () {
+            if (this.throwError) {
+                return this.onerror({target : response});
             }
-        };
+            return this.onload({target : response});
+        }
+    };
 
-        const xhrMockClass = () => xhrMockObj;
+    window.XMLHttpRequest = jest.fn().mockImplementation(() => mockClass);
 
-        window.XMLHttpRequest = jest.fn().mockImplementation(xhrMockClass);
-
-        return xhrMockObj ;
-    }
-
+    return mockClass;
 }
