@@ -122,7 +122,7 @@ export const visit = function (target, visitor) {
     const traverse = (target, parentKey) => {
         Object.entries(target).map(([key, property]) => {
             const path = parentKey.concat(key);
-            target[key] = l8.iso(property) ? traverse(property, path) : visitor(property, path.join("."));
+            target[key] = l8.iso(property) ? traverse(property, path) : visitor(property, path);
         });
         return target;
     };

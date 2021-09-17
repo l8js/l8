@@ -82,7 +82,7 @@ test("visit()", () => {
     expect(l8.vst).toBe(l8.visit);
 
     let visitor = (value, path) => {
-        return `${path}=${value}`;
+        return `${path.join(".")}=${value}`;
     };
 
     let tree = {
