@@ -1,5 +1,6 @@
 /**
  * l8.js
+ * l8
  * Copyright (C) 2021 Thorsten Suckow-Homberg https://github.com/l8js/l8
  *
  * Permission is hereby granted, free of charge, to any person
@@ -26,18 +27,29 @@ import * as l8 from "../../src/core/sugar.js";
 
 
 test("isString", () => {
+    expect(l8.iss).toBe(l8.isString);
     expect(l8.isString({})).toBe(false);
     expect(l8.isString("")).toBe(true);
 });
 
 
 test("isObject", () => {
+    expect(l8.iso).toBe(l8.isObject);
     expect(l8.isObject({})).toBe(true);
     expect(l8.isObject("")).toBe(false);
 });
 
 
+test("isPlainObject", () => {
+    expect(l8.ispo).toBe(l8.isPlainObject);
+    expect(l8.isPlainObject({})).toBe(true);
+    expect(l8.isPlainObject([])).toBe(false);
+    expect(l8.isPlainObject(new Function())).toBe(false);
+});
+
+
 test("isFunction", () => {
+    expect(l8.isf).toBe(l8.isFunction);
     expect(l8.isFunction({})).toBe(false);
     expect(l8.isFunction("")).toBe(false);
     expect(l8.isFunction(() => {})).toBe(true);
@@ -65,12 +77,21 @@ test("is().of()", () => {
 
 
 test("isNumber", () => {
+    expect(l8.isn).toBe(l8.isNumber);
     expect(l8.isNumber("foo")).toBe(false);
     expect(l8.isNumber(1)).toBe(true);
 });
 
 
 test("isArray", () => {
+    expect(l8.isa).toBe(l8.isArray);
     expect(l8.isArray({})).toBe(false);
     expect(l8.isArray([])).toBe(true);
+});
+
+
+test("isRegExp", () => {
+    expect(l8.isrx).toBe(l8.isRegExp);
+    expect(l8.isRegExp({})).toBe(false);
+    expect(l8.isRegExp(/foo/)).toBe(true);
 });

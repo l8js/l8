@@ -23,33 +23,53 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+import {default as CompiledTpl} from "../CompiledTpl.js";
+import * as sugar from "../../core/sugar.js";
+
+
 /**
- * Mocks the window.XmlHttpRequest-object.
- *
- * @example
- *   import {createXmlHttpRequestMock} from "XmlHttpRequest.js";
- *   const response = {
- *       status : 200,
- *       responseText : "foobar";
- *   }
- *   let mock = createXmlHttpRequestMock(response); // returns the mock
+ * Compiled Template representation for javaScript-Strings.
  *
  */
-export function createXmlHttpRequestMock (response) {
+export default class extends CompiledTpl {
 
+    /**
+     * @var fn
+     * @type Function
+     * @private
+     */
 
-    const mockClass = {
-        throwErrror : false,
-        open : jest.fn(),
-        send : function () {
-            if (this.throwError) {
-                return this.onerror({target : response});
-            }
-            return this.onload({target : response});
+    /**
+     * Constructor.
+     *
+     * @param {Function} fn The internal representation of the compiled template wrapped in a function.
+     * @param {Array} keys allowed keys as passed from the compiler
+     *
+     * @throws if fn is not a function
+     */
+    constructor (fn) {
+        super();
+        if (!sugar.isFunction(fn)) {
+            throw new Error("\"fn\" must be of type \"function\"");
         }
-    };
 
-    window.XMLHttpRequest = jest.fn().mockImplementation(() => mockClass);
+        this.fn = fn;
+    }
 
-    return mockClass;
+
+    /**
+     * @inheritdoc
+     */
+    render (data) {
+        const me = this;
+
+        try {
+            return me.fn.call({}, data);
+        } catch (e) {
+            throw new Error(`rendering "data" failed with message ${e.message}`);
+        }
+
+    }
+
+
 }

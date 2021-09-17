@@ -23,33 +23,21 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-/**
- * Mocks the window.XmlHttpRequest-object.
- *
- * @example
- *   import {createXmlHttpRequestMock} from "XmlHttpRequest.js";
- *   const response = {
- *       status : 200,
- *       responseText : "foobar";
- *   }
- *   let mock = createXmlHttpRequestMock(response); // returns the mock
- *
- */
-export function createXmlHttpRequestMock (response) {
+import HyperlinkTransformer from "../../../../src/text/transformer/html/HyperlinkTransformer.js";
 
 
-    const mockClass = {
-        throwErrror : false,
-        open : jest.fn(),
-        send : function () {
-            if (this.throwError) {
-                return this.onerror({target : response});
-            }
-            return this.onload({target : response});
-        }
-    };
+test("transform()", () =>{
 
-    window.XMLHttpRequest = jest.fn().mockImplementation(() => mockClass);
+    let transformer = new HyperlinkTransformer;
 
-    return mockClass;
-}
+    let text = "https://www.conjoon.org is an url " +
+                       "and https://conjoon.com/?schedule=1&foo=bar#localanchor/is/here/too";
+
+    expect(transformer.transform(text)).toBe(
+        "<a href=\"https://www.conjoon.org\">https://www.conjoon.org</a> is an url " +
+                "and <a href=\"https://conjoon.com/?schedule=1&foo=bar#localanchor/is/here/too\">https://conjoon.com/?schedule=1&foo=bar#localanchor/is/here/too</a>"
+    );
+
+});
+
+

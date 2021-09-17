@@ -24,32 +24,38 @@
  */
 
 /**
- * Mocks the window.XmlHttpRequest-object.
+ * Transformer for transforming plain text containing line breaks (\r, \r\n, \n)
+ * into text that replaces the line breaks with "<br />"-tags.
  *
  * @example
- *   import {createXmlHttpRequestMock} from "XmlHttpRequest.js";
- *   const response = {
- *       status : 200,
- *       responseText : "foobar";
- *   }
- *   let mock = createXmlHttpRequestMock(response); // returns the mock
+ *  let text = "Please\n don't\n\n wrap\nme";
+ *
+ *  let transformer = new LineBreakTransformer;
+ *
+ *  transformer.transform(text);
+ *
+ *  // returns:
+ *  // Please<br /> don't<br /><br /> wrap<br />me
  *
  */
-export function createXmlHttpRequestMock (response) {
+export default class {
 
 
-    const mockClass = {
-        throwErrror : false,
-        open : jest.fn(),
-        send : function () {
-            if (this.throwError) {
-                return this.onerror({target : response});
-            }
-            return this.onload({target : response});
-        }
-    };
+    /**
+     * Invokes transforming the passed string.
+     *
+     * @param {String} value
+     *
+     * @return {String}
+     */
+    transform (text) {
 
-    window.XMLHttpRequest = jest.fn().mockImplementation(() => mockClass);
+        const regex = /(\r\n|\n|\r)/gm;
 
-    return mockClass;
+        text = text.replace(regex, matches => ("<br />"));
+
+        return text;
+
+    }
+
 }

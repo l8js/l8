@@ -23,33 +23,25 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+
 /**
- * Mocks the window.XmlHttpRequest-object.
- *
- * @example
- *   import {createXmlHttpRequestMock} from "XmlHttpRequest.js";
- *   const response = {
- *       status : 200,
- *       responseText : "foobar";
- *   }
- *   let mock = createXmlHttpRequestMock(response); // returns the mock
- *
+ * Interface for classes implementing template compiler functionality
  */
-export function createXmlHttpRequestMock (response) {
+export default class {
+
+    /**
+     * Compiles the specified txt and returns an instance of CompiledTpl.
+     * Implementing classes should take care of properly parsing the txt for the allowed keys and
+     * void any other keys detected in the template.
+     *
+     * @param {String} txt
+     * @param {Array} keys An array of keys representing allowed template variables, optional.
+     *
+     * @return {CompiledTpl}
+     *
+     * @throws if any error during compiling occurs
+     */
+    compile (txt, keys) {}
 
 
-    const mockClass = {
-        throwErrror : false,
-        open : jest.fn(),
-        send : function () {
-            if (this.throwError) {
-                return this.onerror({target : response});
-            }
-            return this.onload({target : response});
-        }
-    };
-
-    window.XMLHttpRequest = jest.fn().mockImplementation(() => mockClass);
-
-    return mockClass;
 }

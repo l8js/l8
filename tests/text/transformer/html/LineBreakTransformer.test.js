@@ -23,33 +23,19 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-/**
- * Mocks the window.XmlHttpRequest-object.
- *
- * @example
- *   import {createXmlHttpRequestMock} from "XmlHttpRequest.js";
- *   const response = {
- *       status : 200,
- *       responseText : "foobar";
- *   }
- *   let mock = createXmlHttpRequestMock(response); // returns the mock
- *
- */
-export function createXmlHttpRequestMock (response) {
+import LineBreakTransformer from "../../../../src/text/transformer/html/LineBreakTransformer.js";
 
 
-    const mockClass = {
-        throwErrror : false,
-        open : jest.fn(),
-        send : function () {
-            if (this.throwError) {
-                return this.onerror({target : response});
-            }
-            return this.onload({target : response});
-        }
-    };
+test("transform()", () =>{
 
-    window.XMLHttpRequest = jest.fn().mockImplementation(() => mockClass);
+    let transformer = new LineBreakTransformer;
 
-    return mockClass;
-}
+    let text = "Please \r\n do\rnot \n\nWRAP\n\rmE\r\rNOW";
+
+    expect(transformer.transform(text)).toBe(
+        "Please <br /> do<br />not <br /><br />WRAP<br /><br />mE<br /><br />NOW"
+    );
+
+});
+
+

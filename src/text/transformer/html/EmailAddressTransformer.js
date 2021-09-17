@@ -1,5 +1,6 @@
 /**
  * l8.js
+ * l8
  * Copyright (C) 2021 Thorsten Suckow-Homberg https://github.com/l8js/l8
  *
  * Permission is hereby granted, free of charge, to any person
@@ -22,62 +23,40 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import {default as l8} from "../../../core/Util.js";
-
 /**
- * SenchaTest class.
+ * Transformer for transforming plain text containing Email-Addresses
+ * into text that wraps those Email-Addreses in "<a>"-tags along with the href-attribute's
+ * value (i.e. the Email-Address itself) prefixed with "mailto:"
+ *
+ * @example
+ *  let text = "Please contact info@conjoon.com for further information.";
+ *
+ *  let transformer = new EmailAddressTransformer;
+ *
+ *  transformer.transform(text);
+ *
+ *  // returns:
+ *  // Please contact <a href="mailto:infi@conjoon.com">info@conjoon.com</a> for further information.
+ *
  */
 export default class {
 
-    /**
-     * Constructs the helper for the specified siesta-test.
-     * @param t
-     */
-    constructor (t) {
-        this.t = t;
-        Object.freeze(this);
-    }
 
     /**
-     * Loads the specified class from the configured loader paths (ExtJS)
+     * Invokes transforming the passed string.
      *
-     * @param className
-     * @return {Promise<*>}
-     */
-    async load (className) {
-        const
-            me = this,
-            t = me.t;
-
-        await new Promise((resolve, reject) => {
-            t.requireOk(className, () => resolve(t));
-        });
-
-        return t;
-    }
-
-
-    /**
-     * Delegate for this.t.diag.
+     * @param {String} value
      *
-     * @param message
-     * @return {*}
+     * @return {String}
      */
-    announce (message) {
-        return this.t.diag(message);
+    transform (text) {
+
+        const emailRegex = /[a-zA-Z0-9+._%-]{1,256}@[a-zA-Z0-9][a-zA-Z0-9-]{0,64}(\.[a-zA-Z0-9][a-zA-Z0-9-]{0,25})+/gi;
+
+        text = text.replace(emailRegex, matches => ("<a href=\"mailto:" + matches + "\">" + matches + "</a>"));
+
+        return text;
+
     }
 
-
-    /**
-     * Makes sure the specified class exists.
-     *
-     * @param className
-     */
-    sanitizeClass (className) {
-        const t = this.t;
-
-        const obj = l8.unchain(className);
-        t.expect(obj).toBeDefined();
-        t.expect(obj.$className).toBe(className);
-    }
 }

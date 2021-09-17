@@ -1,5 +1,6 @@
 /**
  * l8.js
+ * l8
  * Copyright (C) 2021 Thorsten Suckow-Homberg https://github.com/l8js/l8
  *
  * Permission is hereby granted, free of charge, to any person
@@ -28,7 +29,7 @@
  * @return {boolean}
  */
 export const isString = target => typeof target === "string";
-
+export const iss = isString;
 
 /**
  * 
@@ -36,6 +37,19 @@ export const isString = target => typeof target === "string";
  * @return {boolean}
  */
 export const isObject = target => typeof target === "object";
+export const iso = isObject;
+
+
+/**
+ *
+ * @param target
+ * @return {boolean}
+ */
+export const isPlainObject = target => typeof target === "object" &&
+                                       Object.prototype.toString.call(target) === "[object Object]" &&
+                                       target.constructor === Object;
+export const ispo = isPlainObject;
+
 
 /**
  * 
@@ -43,6 +57,7 @@ export const isObject = target => typeof target === "object";
  * @return {boolean}
  */
 export const isFunction = target => typeof target === "function";
+export const isf = isFunction;
 
 /**
  *
@@ -50,6 +65,7 @@ export const isFunction = target => typeof target === "function";
  * @return {boolean}
  */
 export const isNumber = target => typeof target === "number";
+export const isn = isNumber;
 
 /**
  *
@@ -57,6 +73,15 @@ export const isNumber = target => typeof target === "number";
  * @return {any}
  */
 export const isArray = target =>  Array.isArray ? Array.isArray(target) : Object.prototype.toString.call(target) === "[object Array]";
+export const isa = isArray;
+
+/**
+ *
+ * @param target
+ * @return {any}
+ */
+export const isRegExp = target => target instanceof RegExp;
+export const isrx = isRegExp;
 
 /**
  * 

@@ -24,32 +24,37 @@
  */
 
 /**
- * Mocks the window.XmlHttpRequest-object.
+ * Transformer for transforming plain-text containing Hyperlinks
+ * into text that wraps those Hyperlinks in "<a>"-tags.
  *
  * @example
- *   import {createXmlHttpRequestMock} from "XmlHttpRequest.js";
- *   const response = {
- *       status : 200,
- *       responseText : "foobar";
- *   }
- *   let mock = createXmlHttpRequestMock(response); // returns the mock
+ *  let text = "This is an url https://www.conjoon.org and it is not clickable";
+ *
+ *  let transformer = new HyperlinkTransformer;
+ *
+ *  transformer.transform(text);
+ *
+ *  // returns:
+ *  // This is an url <a href="https://www.conjoon.org">https://www.conjoon.org</a> and it is not clickable
  *
  */
-export function createXmlHttpRequestMock (response) {
+export default class {
 
+    /**
+     * Invokes transforming the passed string.
+     *
+     * @param {String} value
+     *
+     * @return {String}
+     */
+    transform (text) {
 
-    const mockClass = {
-        throwErrror : false,
-        open : jest.fn(),
-        send : function () {
-            if (this.throwError) {
-                return this.onerror({target : response});
-            }
-            return this.onload({target : response});
-        }
-    };
+        const urlRegex = /(\b(https?):\/\/[-A-Z0-9+&@#/%?=~_|!:,.;]*[-A-Z0-9+&@#/%=~_|])/ig;
 
-    window.XMLHttpRequest = jest.fn().mockImplementation(() => mockClass);
+        text = text.replace(urlRegex, matches => ("<a href=\"" + matches + "\">" + matches + "</a>"));
 
-    return mockClass;
+        return text;
+
+    }
+
 }

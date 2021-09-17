@@ -1,5 +1,6 @@
 /**
  * l8.js
+ * l8
  * Copyright (C) 2021 Thorsten Suckow-Homberg https://github.com/l8js/l8
  *
  * Permission is hereby granted, free of charge, to any person
@@ -22,130 +23,7 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import * as core from "./sugar.js";
-
-/**
- * Utilities
- */
-
-
-/**
- * Creates an object chain on the target object and initializes it with
- * the defaultValue, if specified.
- * Returns the target object.
- *
- * @example
- *    let obj = {};
- *    coon.core.Util.chain("a.b.c.d", obj, "foo");
- *
- *    // obj
- *    // { a : { b : {c : { d : "foo"}}}}
- *
- * @param {String} str
- * @param {Object} target
- *
- * @param defaultValue
- */
-export const chain = function (str, target = {}, defaultValue = undefined) {
-
-    const keys = str.split(".");
-
-    const cr = function (obj, keys) {
-
-        let key;
-
-        key = keys.shift();
-        if (!obj[key]) {
-            obj[key] = keys.length ? {} : defaultValue;
-        }
-
-        if (keys.length) {
-            cr(obj[key], keys);
-        }
-
-        return obj;
-    };
-
-    cr(target, keys);
-
-    return target;
-};
-
-
-/**
- * Expects an Object and flips key/value/pairs.
- *
- *      @example
- *      var foo = { 1 : "foo", 2 : "bar", 3 : "snafu"};
- *
- *      coon.core.Util.flip(foo); // {"bar" : 1, "bar": 2, "snafu" : 3}
- *
- * @param {Object} input
- *
- * @return {Object} a new object where the key/value pairs are flipped
- */
-export const flip = function (input) {
-    /**
-     * no arrow with destruct assignment, see lib-cn_core#18
-     */
-    return Object.assign({}, ...Object.entries(input).map(function ([k, v]){ return {[v] : k};}));
-};
-
-
-/**
- * Expects an Object and removes all the entries which equal to match.
- *
- *      @example
- *      var foo = { 1 : "", 2 : "bar", 3 : ""};
- *
- *      coon.core.Util.purge(foo, ""); // {2 : "bar"}
- *
- * @param {Object} input
- * @param {Mixed} match, defaults to undefined
- *
- * @return {Object} a new filtered object
- */
-export const purge = function (input, match= undefined) {
-    /**
-         * no arrow with destruct assignment, see lib-cn_core#18
-         */
-    return Object.fromEntries(Object.entries(input).filter(function ([k, v]) {return v !== match;}));
-};
-
-
-/**
- * Splits the specified string by looking for "." as separators and returns
- * undefined if the evaluated property is not available, otherwise the value
- * of the property.
- *
- *      @example
- *      var foo = { 1 : { 2 : { 3 : { 4 : 'bar'}}}};
- *
- *      coon.core.Util.unchain('1.2.3.4', foo); // 'bar'
- *
- * @param {String} chain The object chain to resolve
- * @param {Object} scope The scope where the chain should be looked up
- * @param {Mixed} defaultValue a defaultValue to return in case the chain is not existing
- *
- * @return {<*>} undefined if either scope was not found or the chain could
- * not be resolved, otherwise the value found in [scope][chain]
- */
-export const unchain = function (chain, scope, defaultValue = undefined) {
-
-    var parts = chain.split("."),
-        obj   = scope;
-
-    while (obj !== undefined && parts.length) {
-        obj = obj[parts.shift()];
-    }
-
-    if (obj === undefined) {
-        return defaultValue;
-    }
-
-    return obj;
-};
-
+import * as l8 from "./sugar.js";
 
 /**
  * Expects a numeric array and returns an array where the entries are subsequent
@@ -156,7 +34,7 @@ export const unchain = function (chain, scope, defaultValue = undefined) {
  *      var list   = ['4', 5, '1', '3', 6, '8'];
  *      var target = 5;
  *
- *      coon.core.Util.listNeighbours(list, target); // [3, 4, 5, 6]
+ *      listNeighbours(list, target); // [3, 4, 5, 6]
  *
  * @param {Array} list The list of values to return the neighbours from
  * @param {Number} target The initial value to look up its neighbours for
@@ -207,13 +85,13 @@ export const listNeighbours = function (list, target) {
 /**
  * Expects a numeric array and returns an array where the entries are itself
  * arrays representing possible groups of subsequent indices, ordered from
- * lowest to highest. Dublicate items will be removed.
+ * lowest to highest. Duplicate items will be removed.
  *
  *      var list   = ['4', 5, '1', '3', 6, '8'];
- *      coon.core.Util.groupIndices(list); // [[1], [3, 4, 5], [6]]
+ *      groupIndices(list); // [[1], [3, 4, 5], [6]]
  *
  *      var list   = ['1', 2, '3'];
- *      coon.core.Util.groupIndices(list); // [[1, 2, 3]]
+ *      groupIndices(list); // [[1, 2, 3]]
  *
  * @param {Array} list The list of values to return the grouped indices from
  *
@@ -226,7 +104,7 @@ export const groupIndices = function (list) {
     var groups = [],
         pages;
 
-    if (!core.isArray(list)) {
+    if (!l8.isArray(list)) {
         throw new Error("'list' must be an array");
     }
 
@@ -270,11 +148,11 @@ export const createRange = function (start, end) {
 
     var ret;
 
-    if (!core.isNumber(start)) {
+    if (!l8.isn(start)) {
         throw new Error("'start' must be a number");
     }
 
-    if (!core.isNumber(end)) {
+    if (!l8.isn(end)) {
         throw new Error("'end' must be a number");
     }
 
@@ -293,4 +171,38 @@ export const createRange = function (start, end) {
     });
 
 };
+
+/**
+ * Searches for the first entry in source. Looks up the key in source if it is an object and returns the first
+ * match found, otherwise iterates through the array and returns the first match.
+ *
+ * @example
+ *
+ *  l8.findFirst("bar", {foo : {}, bar : {snafu : ""}}; // returns the bar-object
+ *  l8.findFirst("bar", [{foo : {}}, {bar : {snafu : ""}}]; // returns the bar-object
+ *
+ * @param {String} key
+ * @param {(Array|cObject)} source
+ *
+ * @return {?*}
+ */
+export const findFirst = (key, source) => {
+
+    let match = null,
+        iso = l8.iso(source);
+
+    (l8.isa(source) ? source : iso ? Object.entries(source) : []).some(item => {
+
+        if (iso && item[0] === key) {
+            match = item[1];
+            return true;
+        } else if (l8.iso(item) && item[key] !== undefined) {
+            match = item[key];
+            return true;
+        }
+    });
+
+    return match;
+};
+export const ff = findFirst;
 

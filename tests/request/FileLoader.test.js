@@ -23,8 +23,8 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import FileLoader from "../../../src/core/request/FileLoader.js";
-import RequestMock from "../../__mocks__/XmlHttpRequest.js";
+import FileLoader from "../../src/request/FileLoader.js";
+import {createXmlHttpRequestMock} from "../__mocks__/XmlHttpRequest.js";
 
 /**
  * Helper.
@@ -35,52 +35,63 @@ import RequestMock from "../../__mocks__/XmlHttpRequest.js";
  * @param result
  * @return {*}
  */
-const testLoader = (which, filename, testCase, result) => {
+const testLoader = async (which, filename, testCase, result) => {
 
     let method = Object.keys(testCase)[0],
         response = testCase[method],
-        mock = RequestMock.respondWith(response),
-        fileLoader = new FileLoader();
+        mock = createXmlHttpRequestMock(response),
+        fileLoader = new FileLoader(),
+        assertionCount = 2;
 
-    let op = fileLoader[which](filename);
+    mock.throwError = method === "throws";
+    expect.assertions(assertionCount);
 
-    if (result !== undefined) {
-        expect(op).resolves.toBe(result);
+    let op;
+
+    try {
+        op = await fileLoader[which](filename);
+        expect(op).toBe(result);
+
+    } catch (e) {
+        expect(e.message).toBe(result);
     }
 
+
     expect(mock.open).toHaveBeenCalledWith(which  === "ping" ? "HEAD" : "GET", filename);
-    mock[method]();
+
 
     return op;
 };
 
-test("ping() - file exists", () => {
-    testLoader("ping", "filename", {load : {status : 200}}, true);
+
+test("ping() - file exists", async () => {
+    await testLoader("ping", "filename", {load : {status : 200}}, true);
 });
 
 
-test("ping() - file does not exist", () => {
-    testLoader("ping", "nope", {load : {status : 400}}, false);
+test("ping() - file does not exist", async () => {
+    await testLoader("ping", "nope", {load : {status : 400}}, false);
 });
 
 
-test("ping() - exception w/ onerror returns false", () => {
-    testLoader("ping", "exc", {throws : {responseURL : 200}}, false);
+test("ping() - exception w/ onerror returns false", async () => {
+    await testLoader("ping", "exc", {throws : {responseURL : 200}}, false);
 });
 
 
-test("load()", () => {
-    testLoader("load", "loaded", {load : {status : 200, responseText : "Hello World!"}}, "Hello World!");
+test("load()", async () => {
+    await testLoader("load", "loaded", {load : {status : 200, responseText : "Hello World!"}}, "Hello World!");
 });
 
 
-test("load()", () => {
-    let exc = testLoader("load", "loaded", {load : {status : 400, statusText : "denied"}});
-    expect(exc).rejects.toThrow("400 denied");
+test("load()", async () => {
+    await testLoader("load", "loaded", {load : {status : 400, statusText : "denied"}}, "400 denied");
 });
 
 
-test("load() - exception w/ onerror", () => {
-    let exc = testLoader("load", "loaded", {throws : {responseURL : "mockurl"}});
-    expect(exc).rejects.toThrow("An unexpected error occured while trying to load from \"mockurl\"");
+test("load() - exception w/ onerror", async () => {
+    await testLoader(
+        "load", "loaded",
+        {throws : {responseURL : "mockurl"}},
+        "An unexpected error occured while trying to load from \"mockurl\"");
 });

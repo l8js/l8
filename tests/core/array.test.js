@@ -1,5 +1,6 @@
 /**
  * l8.js
+ * l8
  * Copyright (C) 2021 Thorsten Suckow-Homberg https://github.com/l8js/l8
  *
  * Permission is hereby granted, free of charge, to any person
@@ -22,33 +23,16 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import * as util from "../../src/core/util.js";
-
-
-test("unchain()", () => {
-
-    const testMe = {1:{2:{3:{4:{5:"foo"}}}}};
-
-    expect(util.unchain("1.2.3.4.5", testMe)).toBe("foo");
-    expect(util.unchain("1.2.9.4.5", testMe)).toBeUndefined();
-
-    expect(util.unchain("1.2.3.4.5")).toBeUndefined();
-
-    expect(util.unchain("1.2.3.4.5", testMe, "end")).toBe("foo");
-    expect(util.unchain("1.2.8.4.5", testMe, "defaultValue")).toBe("defaultValue");
-    expect(util.unchain("1.2.3.4.6", testMe, "defaultValue")).toBe("defaultValue");
-
-});
-
+import * as l8 from "../../src/core/array.js";
 
 test("listNeighbours()", () => {
 
-    expect(util.listNeighbours(["4", 5, "5", "1", "3", 6, "8"], 5)).toEqual([3, 4, 5, 6]);
-    expect(util.listNeighbours([1, 2, 3], 2)).toEqual([1, 2, 3]);
+    expect(l8.listNeighbours(["4", 5, "5", "1", "3", 6, "8"], 5)).toEqual([3, 4, 5, 6]);
+    expect(l8.listNeighbours([1, 2, 3], 2)).toEqual([1, 2, 3]);
 
-    expect(util.listNeighbours([3, 2, 1, 2], 1)).toEqual([1, 2, 3]);
+    expect(l8.listNeighbours([3, 2, 1, 2], 1)).toEqual([1, 2, 3]);
 
-    expect(util.listNeighbours(["4", 0, -1, 23, 1, 18, 5, "1", "3", 6, "8", "17"], 17)).toEqual([17, 18]);
+    expect(l8.listNeighbours(["4", 0, -1, 23, 1, 18, 5, "1", "3", 6, "8", "17"], 17)).toEqual([17, 18]);
 });
 
 
@@ -68,7 +52,7 @@ test("groupIndices()", () => {
             expected  : [[1, 2, 3, 4, 5, 6, 7], [9 ,10, 11], [15, 16], [99]]
         }], test, exc;
 
-    try{util.groupIndices("foo");}catch(e){exc = e;}
+    try{l8.groupIndices("foo");}catch(e){exc = e;}
     expect(exc).toBeDefined();
     expect(exc.message).toBeDefined();
 
@@ -76,8 +60,8 @@ test("groupIndices()", () => {
     for (var i = 0, len = tests.length; i < len; i++) {
         test = tests[i];
 
-        expect(util.groupIndices(test.value)).not.toBe(test.value);
-        expect(util.groupIndices(test.value)).toEqual(test.expected);
+        expect(l8.groupIndices(test.value)).not.toBe(test.value);
+        expect(l8.groupIndices(test.value)).toEqual(test.expected);
     }
 });
 
@@ -100,20 +84,20 @@ test("createRange()", () => {
         }], test;
 
 
-    try{util.createRange("foo");}catch(e){exc = e;}
+    try{l8.createRange("foo");}catch(e){exc = e;}
     expect(exc).toBeDefined();
     expect(exc.message).toBeDefined();
     expect(exc.message.toLowerCase()).toContain("must be a number");
     expect(exc.message.toLowerCase()).toContain("start");
     expect(exc.message.toLowerCase()).not.toContain("end");
 
-    try{util.createRange(1, "bar");}catch(e){exc = e;}
+    try{l8.createRange(1, "bar");}catch(e){exc = e;}
     expect(exc).toBeDefined();
     expect(exc.message).toBeDefined();
     expect(exc.message.toLowerCase()).toContain("must be a number");
     expect(exc.message.toLowerCase()).toContain("end");
 
-    try{util.createRange(1, -9);}catch(e){exc = e;}
+    try{l8.createRange(1, -9);}catch(e){exc = e;}
     expect(exc).toBeDefined();
     expect(exc.message).toBeDefined();
     expect(exc.message.toLowerCase()).toContain("greater than");
@@ -123,60 +107,19 @@ test("createRange()", () => {
     for (var i = 0, len = tests.length; i < len; i++) {
         test = tests[i];
 
-        expect(util.createRange.apply(null, test.value)).toEqual(test.expected);
+        expect(l8.createRange.apply(null, test.value)).toEqual(test.expected);
     }
 });
 
-test("purge()", () => {
 
-    let input = {a : 1, b : undefined, c : 3, d : undefined};
+test("findFirst()", () => {
 
-    expect(util.purge(input)).toEqual({a : 1, c : 3});
+    expect(l8.ff).toBe(l8.findFirst);
 
-    input = {a : 1, b : "", c : ""};
-    expect(util.purge(input, "")).toEqual({a : 1});
+    let obj = {foo : {}, bar : {snafu : ""}};
+    expect(l8.findFirst("bar", obj)).toBe(obj.bar);
 
-    input = {a : 1, b : "", c : ""};
-    expect(util.purge(input, "")).not.toBe(input);
-
+    let arr = [{foo : {}}, {bar : {snafu : ""}}];
+    expect(l8.findFirst("bar", arr)).toBe(arr[1].bar);
 
 });
-
-
-test("flip()", () => {
-
-    let input = {a : 1, b : 2, c : 3, d : 4},
-        res = util.flip(input);
-
-    expect(res).not.toBe(input);
-    expect(res).toEqual({1 : "a", 2 : "b", 3 : "c" , 4: "d"});
-});
-
-
-test("chain()", () => {
-
-    let obj = {};
-    let res = util.chain("a.b.c.d", obj, "foo");
-
-    expect(res).toBe(obj);
-
-    expect(res).toEqual({ a : { b : {c : { d : "foo"}}}} );
-
-    res = util.chain("a.b.c.d", {"a" : {"b" : {}}}, "bar");
-    expect(res).toEqual({ a : { b : {c : { d : "bar"}}}} );
-
-    res = util.chain("a.b.c.d", {"a" : {"d" : "u"}}, "bar");
-    expect(res).toEqual({ a : { b : {c : { d : "bar"}}, d : "u"}} );
-
-    let ctrl = "foo.bar.snafu";
-    obj = {};
-    util.chain("pluginMap", obj, {[ctrl] : []});
-    ctrl = "bar.snafu.foo";
-
-    util.chain("pluginMap", obj, {[ctrl] : []});
-    expect(obj.pluginMap["foo.bar.snafu"]).toEqual([]);
-    expect(obj.pluginMap["bar.snafu.foo"]).toBeUndefined();
-
-
-});
-

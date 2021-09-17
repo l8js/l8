@@ -23,33 +23,35 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-/**
- * Mocks the window.XmlHttpRequest-object.
- *
- * @example
- *   import {createXmlHttpRequestMock} from "XmlHttpRequest.js";
- *   const response = {
- *       status : 200,
- *       responseText : "foobar";
- *   }
- *   let mock = createXmlHttpRequestMock(response); // returns the mock
- *
- */
-export function createXmlHttpRequestMock (response) {
+import {default as CompiledTpl} from "../../src/template/CompiledTpl";
+
+let inst ;
+
+const API = ["render"];
 
 
-    const mockClass = {
-        throwErrror : false,
-        open : jest.fn(),
-        send : function () {
-            if (this.throwError) {
-                return this.onerror({target : response});
-            }
-            return this.onload({target : response});
-        }
-    };
+// +----------------------------------------------------------------------------
+// |                    =~. setup / teardown .~=
+// +----------------------------------------------------------------------------
 
-    window.XMLHttpRequest = jest.fn().mockImplementation(() => mockClass);
+beforeEach(() => {
+    inst = new CompiledTpl;
+});
 
-    return mockClass;
-}
+
+afterEach(() => {
+    inst = null;
+});
+
+
+// +----------------------------------------------------------------------------
+// |                    =~. Tests .~=
+// +----------------------------------------------------------------------------
+
+test("functionality", () => {
+    expect(inst).toBeInstanceOf(CompiledTpl);
+    API.forEach(fn => {
+        expect(inst[fn]).toBeDefined();
+    });
+
+});

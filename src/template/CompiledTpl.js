@@ -23,33 +23,23 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+
 /**
- * Mocks the window.XmlHttpRequest-object.
- *
- * @example
- *   import {createXmlHttpRequestMock} from "XmlHttpRequest.js";
- *   const response = {
- *       status : 200,
- *       responseText : "foobar";
- *   }
- *   let mock = createXmlHttpRequestMock(response); // returns the mock
+ * Interface for Compiled Templates.
  *
  */
-export function createXmlHttpRequestMock (response) {
+export default class {
 
+    /**
+     * Replaces keys from data found in this compiled template with their appropriate values
+     * and returns the string representation of this.
+     *
+     * @param {Object} data
+     *
+     * @return {String}
+     *
+     * @throws if any error during the rendering process occurs
+     */
+    render (data) {}
 
-    const mockClass = {
-        throwErrror : false,
-        open : jest.fn(),
-        send : function () {
-            if (this.throwError) {
-                return this.onerror({target : response});
-            }
-            return this.onload({target : response});
-        }
-    };
-
-    window.XMLHttpRequest = jest.fn().mockImplementation(() => mockClass);
-
-    return mockClass;
 }
