@@ -21,7 +21,8 @@
     },
     "ignorePatterns" : [
         "*config*.js",
-        "**/dist/*"
+        "**/dist/*",
+        "**/docs/*"
     ],
     "rules": {
         "indent": ["error"],
