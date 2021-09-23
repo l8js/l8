@@ -23,18 +23,24 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+/**
+ * @module l8/request
+ */
+
+
 import {isString} from "../core/sugar.js";
 
 /**
- * ResourceRequestor-implementation using XmlHttpRequest api.
+ * FileLoader-implementation using XmlHttpRequest api.
  *
  * @example
  *
  *    // existing json-file at "./app-cn_mail.conf.json"
- *    const fileLoader = new XmlHttpResourceRequestor();
+ *    const fileLoader = new FileLoader();
  *    const res = await fileLoader.request("./app-cn_mail.conf.json");
  *    console.log(res); // plain text contents of the file on success
  *
+ * @class FileLoader
  */
 export default class {
 

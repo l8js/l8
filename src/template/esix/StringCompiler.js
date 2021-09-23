@@ -23,11 +23,17 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+/**
+ * @module l8/template/esix
+ */
+
+
 import {default as Compiler} from "../Compiler.js";
 import {default as Tpl} from "./Tpl.js";
 /**
  * Compiler implementation for JavaScript template strings.
  *
+ * @class StringCompiler
  */
 export default class extends Compiler {
 

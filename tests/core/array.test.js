@@ -114,8 +114,6 @@ test("createRange()", () => {
 
 test("findFirst()", () => {
 
-    expect(l8.ff).toBe(l8.findFirst);
-
     let obj = {foo : {}, bar : {snafu : ""}};
     expect(l8.findFirst("bar", obj)).toBe(obj.bar);
 

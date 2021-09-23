@@ -23,12 +23,18 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+/**
+ * @module l8/template/esix
+ */
+
+
 import Template from "../Template.js";
 import StringCompiler from "./StringCompiler.js";
 
 /**
  * Template Class providing support for JavaScript template strings.
  *
+ * @class StringTemplate
  */
 export default class extends Template {
 

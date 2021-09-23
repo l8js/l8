@@ -24,6 +24,11 @@
  */
 
 /**
+ * @module l8/text/transformer/html
+ */
+
+
+/**
  * Transformer for transforming plain-text containing Hyperlinks
  * into text that wraps those Hyperlinks in "<a>"-tags.
  *
@@ -36,6 +41,8 @@
  *
  *  // returns:
  *  // This is an url <a href="https://www.conjoon.org">https://www.conjoon.org</a> and it is not clickable
+ *
+ * @class HyperlinkTransformer
  *
  */
 export default class {

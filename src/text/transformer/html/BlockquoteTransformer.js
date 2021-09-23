@@ -24,6 +24,11 @@
  */
 
 /**
+ * @module l8/text/transformer/html
+ */
+
+
+/**
  * Transformer for transforming quoted plain-text (quote marks: ">")
  * to a text containing blockquotes.
  *
@@ -63,6 +68,7 @@
  *  //  </blockquote>
  *  // </blockquote>
  *
+ * @class BlockQuoteTransformer
  */
 export default class {
 

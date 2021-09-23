@@ -23,6 +23,10 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+/**
+ * @module l8
+ */
+
 import * as l8 from "./sugar.js";
 import * as string from "./string.js";
 
@@ -36,7 +40,7 @@ import * as string from "./string.js";
  *      let target = lck({}, "foo", "bar", {"foo" : 1, "bar" : 2}); // target = {foo : 1, bar : 2};
  *
  * @param {!Object} target
- * @param {!(String|Array} prop Either the property name or an array of property names
+ * @param {!(String|Array)} prop Either the property name or an array of property names
  * that should be created on "target" with their corresponding values found in "value"
  *
  * @param {*=} value
@@ -86,7 +90,6 @@ export const lock = function (target, prop, value) {
 
     return target;
 };
-export const lck = lock;
 
 /**
  * This callback is displayed as part of the Requester class.
@@ -122,7 +125,7 @@ export const visit = function (target, visitor) {
     const traverse = (target, parentKey) => {
         Object.entries(target).map(([key, property]) => {
             const path = parentKey.concat(key);
-            target[key] = l8.iso(property) ? traverse(property, path) : visitor(property, path);
+            target[key] = l8.isObject(property) ? traverse(property, path) : visitor(property, path);
         });
         return target;
     };
@@ -130,7 +133,6 @@ export const visit = function (target, visitor) {
     traverse(target, []);
     return target;
 };
-export const vst = visit;
 
 
 /**
@@ -207,11 +209,6 @@ export const chain = function (chains, target = {}, defaultValue = undefined, ov
     return target;
 };
 
-/**
- * Alias for chain()
- * @type {function(!(String|Array), Object=, ?(*|Function)=): Object}
- */
-export const chn = chain;
 
 /**
  * Expects an Object and flips key/value/pairs.
@@ -293,12 +290,6 @@ export const unchain = function (chain, scope, defaultValue = undefined) {
 };
 
 /**
- * Alias for unchain()
- * @type {function(!(String|Array), Object=, ?(*|Function)=): Object}
- */
-export const nchn = unchain;
-
-/**
  * Lets you specify a regular expression to make sure only those
  * keys are assigned from source to target that match the expression.
  *
@@ -310,8 +301,8 @@ export const nchn = unchain;
  *     // results in {"foo": "bar", "some": "obj"}
  *
  *
- * @param {!Object} target The target object to assign tto
- * @param {...(Object|[Object, (RegExp|...String])} The objects to use for assigning. If an array is submitted, the first
+ * @param {!Object} target The target object to assign to
+ * @param {(Object|(...Object|(RegExp|String)))} [sources] objects to use for assigning. If an array is submitted, the first
  * index is the object source to assign from, and the second argument ist the regular expression that must match
  * the object keys to use for assignment. If there is no RegExp as a second argument but instead a string, this string will
  * be used for comparison. Can also be an arbitrary number of strings. All the keys not strict equaling to the submitted
@@ -337,7 +328,7 @@ export const assign = function (target) {
             return Object.fromEntries(
                 Object.entries(obj).filter(entry => {
                     let key = entry[0];
-                    if (l8.isrx(regexp)) {
+                    if (l8.isRegExp(regexp)) {
                         return key.match(regexp) !== null;
                     } else {
                         return string.isNot.apply(string, [key].concat(args));

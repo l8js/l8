@@ -23,6 +23,10 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+/**
+ * @module l8/template/esix
+ */
+
 import {default as CompiledTpl} from "../CompiledTpl.js";
 import * as sugar from "../../core/sugar.js";
 
@@ -30,6 +34,7 @@ import * as sugar from "../../core/sugar.js";
 /**
  * Compiled Template representation for javaScript-Strings.
  *
+ * @class Tpl
  */
 export default class extends CompiledTpl {
 

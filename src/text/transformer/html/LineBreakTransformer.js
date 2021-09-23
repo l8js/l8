@@ -24,6 +24,11 @@
  */
 
 /**
+ * @module l8/text/transformer/html
+ */
+
+
+/**
  * Transformer for transforming plain text containing line breaks (\r, \r\n, \n)
  * into text that replaces the line breaks with "<br />"-tags.
  *
@@ -36,6 +41,8 @@
  *
  *  // returns:
  *  // Please<br /> don't<br /><br /> wrap<br />me
+ *
+ * @class LineBreakTransformer
  *
  */
 export default class {
