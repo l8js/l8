@@ -83,7 +83,6 @@ export const replace = function (tokens, replace, target) {
 };
 
 
-
 /**
  * Unifies the string by removing subsequent entries of duplicates of token.
  *
