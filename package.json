@@ -9,8 +9,8 @@
   },
   "scripts": {
     "test": "jest",
-    "postinstall": "npx rollup -c"
-   },
+    "postinstall": "npx rollup -c && npx jsdoc ./src/ -r -d docs && node-git-hooks"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/l8js/l8.git"
@@ -30,6 +30,8 @@
     "babel-jest": "^27.0.1",
     "eslint": "^7.27.0",
     "jest": "^27.0.1",
+    "jsdoc": "^3.6.7",
+    "node-git-hooks": "^1.0.6",
     "rollup": "^2.50.5"
   }
 }

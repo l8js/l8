@@ -23,6 +23,11 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+/**
+ * @module l8
+ */
+
+
 import * as l8 from "./sugar.js";
 
 /**
@@ -154,7 +159,7 @@ const handler = {
      * Otherwise, this handler assumes that target is already a bound-method. In any case it is made sure
      * that the arguments are properly passed to the methods.
      *
-     * @param {<*>} target The target object.
+     * @param {*} target The target object.
      * @param {Object} thisArg The this argument for the call.
      * @param {Array} argumentsList The list of arguments for the call.
      */
@@ -181,7 +186,7 @@ const handler = {
      * represented by target.
      * Otherwise, a Proxy for the function is created, which is bound(!) to the target.
      *
-     * @param {<*>} target The target object.
+     * @param {*} target The target object.
      * @param {String} property The name or Symbol of the property to get.
      * @param {Proxy} receiver Either the proxy or an object that inherits from the proxy.
      */

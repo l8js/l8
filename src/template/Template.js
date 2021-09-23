@@ -23,10 +23,16 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+/**
+ * @module l8/template
+ */
+
 
 /**
  * Interface for template implementations.
  *
+ * @class Template
+ * @abstract
  */
 export default class {
 

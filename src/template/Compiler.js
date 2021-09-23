@@ -23,9 +23,16 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+/**
+ * @module l8/template
+ */
+
 
 /**
  * Interface for classes implementing template compiler functionality
+ *
+ * @class Compiler
+ * @abstract
  */
 export default class {
 

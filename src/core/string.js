@@ -23,6 +23,11 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+/**
+ * @module l8
+ */
+
+
 import * as l8 from "./sugar.js";
 
 /**
@@ -62,12 +67,12 @@ import * as l8 from "./sugar.js";
  */
 export const replace = function (tokens, replace, target) {
 
-    if (!l8.iss(target)) {
+    if (!l8.isString(target)) {
         throw new Error("\"str\" must be a string");
     }
 
     tokens  = [].concat(tokens);
-    replace = !l8.iss(replace) ? [].concat(replace) : new Array(tokens.length).fill(replace);
+    replace = !l8.isString(replace) ? [].concat(replace) : new Array(tokens.length).fill(replace);
 
     tokens.forEach((item, index) => {
         target = target.replace(new RegExp(escapeRegExp(item), "g"), replace[index] ?? "");
@@ -76,7 +81,7 @@ export const replace = function (tokens, replace, target) {
 
     return target;
 };
-export const rpl = replace;
+
 
 
 /**
@@ -93,7 +98,7 @@ export const rpl = replace;
  */
 export const unify = function (target, token) {
 
-    if (!l8.iss(target) || !l8.iss(token)) {
+    if (!l8.isString(target) || !l8.isString(token)) {
         throw new Error("\"str\" must be a string");
     }
 

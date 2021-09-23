@@ -23,6 +23,10 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+/**
+ * @module l8
+ */
+
 import * as l8 from "./sugar.js";
 
 /**
@@ -88,7 +92,7 @@ export const listNeighbours = function (list, target) {
  * lowest to highest. Duplicate items will be removed.
  *
  *      var list   = ['4', 5, '1', '3', 6, '8'];
- *      groupIndices(list); // [[1], [3, 4, 5], [6]]
+ *      groupIndices(list); // [[1], [3, 4, 5, 6], [8]]
  *
  *      var list   = ['1', 2, '3'];
  *      groupIndices(list); // [[1, 2, 3]]
@@ -148,11 +152,11 @@ export const createRange = function (start, end) {
 
     var ret;
 
-    if (!l8.isn(start)) {
+    if (!l8.isNumber(start)) {
         throw new Error("'start' must be a number");
     }
 
-    if (!l8.isn(end)) {
+    if (!l8.isNumber(end)) {
         throw new Error("'end' must be a number");
     }
 
@@ -182,21 +186,21 @@ export const createRange = function (start, end) {
  *  l8.findFirst("bar", [{foo : {}}, {bar : {snafu : ""}}]; // returns the bar-object
  *
  * @param {String} key
- * @param {(Array|cObject)} source
+ * @param {(Array|Object)} source
  *
  * @return {?*}
  */
 export const findFirst = (key, source) => {
 
     let match = null,
-        iso = l8.iso(source);
+        iso = l8.isObject(source);
 
-    (l8.isa(source) ? source : iso ? Object.entries(source) : []).some(item => {
+    (l8.isArray(source) ? source : iso ? Object.entries(source) : []).some(item => {
 
         if (iso && item[0] === key) {
             match = item[1];
             return true;
-        } else if (l8.iso(item) && item[key] !== undefined) {
+        } else if (l8.isObject(item) && item[key] !== undefined) {
             match = item[key];
             return true;
         }
@@ -204,5 +208,4 @@ export const findFirst = (key, source) => {
 
     return match;
 };
-export const ff = findFirst;
 

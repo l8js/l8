@@ -34,13 +34,13 @@ test("lck", () => {
 
 
     const throwers = [{
-        fn : () => l8.lck(extensible),
+        fn : () => l8.lock(extensible),
         match : /valid property name/
     }, {
-        fn : () => l8.lck(frozen),
+        fn : () => l8.lock(frozen),
         match : /extensible/
     }, {
-        fn : () => l8.lck(sealed),
+        fn : () => l8.lock(sealed),
         match : /extensible/
     }];
 
@@ -48,7 +48,7 @@ test("lck", () => {
         expect(() => fn()).toThrow(match);
     });
 
-    let ext = l8.lck(extensible, "foo", "bar");
+    let ext = l8.lock(extensible, "foo", "bar");
 
     expect(ext).toBe(extensible);
     expect(ext.foo).toBeDefined();
@@ -56,17 +56,17 @@ test("lck", () => {
     expect(() => ext.foo = "snafu").toThrow();
 
     let value = {foo : 1, bar : 2};
-    ext = l8.lck({}, ...Object.keys(value), value);
+    ext = l8.lock({}, ...Object.keys(value), value);
     expect(ext.foo).toBe(1);
     expect(ext.bar).toBe(2);
 
     value = {foo : 3, bar : 4};
-    ext = l8.lck({}, Object.keys(value), value);
+    ext = l8.lock({}, Object.keys(value), value);
     expect(ext.foo).toBe(3);
     expect(ext.bar).toBe(4);
 
     value = {fs : {existsSync : "foo"}};
-    ext = l8.lck(
+    ext = l8.lock(
         {},
         "senchaCmd", "fs", "exec", "resources",
         "targetBase", "targetClassic", "targetModern",
@@ -78,8 +78,6 @@ test("lck", () => {
 
 
 test("visit()", () => {
-
-    expect(l8.vst).toBe(l8.visit);
 
     let visitor = (value, path) => {
         return `${path.join(".")}=${value}`;
@@ -112,8 +110,6 @@ test("visit()", () => {
 
 
 test("unchain()", () => {
-
-    expect(l8.nchn).toBe(l8.unchain);
 
     const testMe = {1:{2:{3:{4:{5:"foo"}}}}};
 
@@ -159,9 +155,6 @@ test("flip()", () => {
 
 
 test("chain()", () => {
-
-
-    expect(l8.chn).toBe(l8.chain);
 
     let obj = {};
     let res = l8.chain("a.b.c.d", obj, "foo");

@@ -24,6 +24,11 @@
  */
 
 /**
+ * @module l8/text/transformer/html
+ */
+
+
+/**
  * Transformer for transforming plain text containing Email-Addresses
  * into text that wraps those Email-Addreses in "<a>"-tags along with the href-attribute's
  * value (i.e. the Email-Address itself) prefixed with "mailto:"
@@ -37,6 +42,8 @@
  *
  *  // returns:
  *  // Please contact <a href="mailto:infi@conjoon.com">info@conjoon.com</a> for further information.
+ *
+ * @class EmailAddressTransformer
  *
  */
 export default class {

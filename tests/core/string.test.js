@@ -29,8 +29,6 @@ test("replace()", () => {
 
     expect(() => l8.replace("foo", "bar", {})).toThrow(/must be a string/);
 
-    expect (l8.rpl).toBe(l8.replace);
-
     expect(l8.replace(["foo", "bar"], ["oof", "rab"], "this foo is bar")).toBe("this oof is rab");
     expect(l8.replace("foo", "bar",  "this foo is barfoo")).toBe("this bar is barbar");
     expect(l8.replace(["A", "B"], ["B", "D"], "A")).toBe("D");
