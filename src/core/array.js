@@ -182,7 +182,7 @@ export const createRange = function (start, end) {
  *  l8.findFirst("bar", [{foo : {}}, {bar : {snafu : ""}}]; // returns the bar-object
  *
  * @param {String} key
- * @param {(Array|cObject)} source
+ * @param {(Array|Object)} source
  *
  * @return {?*}
  */
