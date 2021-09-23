@@ -1,13 +1,7 @@
 # l8js
 
 [Site](https://github.com/l8js/l8) |
-[Twitter](https://twitter.com/ThorstenSuckow) 
-
-```shell
-$ npm run build
-$ lodash -o ./dist/lodash.js
-$ lodash core -o ./dist/lodash.core.js
-```
+[Twitter](https://twitter.com/ThorstenSuckow)
 
 **l8js** is released under the [MIT license](https://github.com/l8js/l8/blob/main/LICENSE.txt) & supports modern environments.
 
