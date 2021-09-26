@@ -1,6 +1,6 @@
 {
   "name": "@l8js/l8",
-  "version": "0.2.2",
+  "version": "0.2.6",
   "description": "Lightweight core library for JavaScript projects",
   "main": "dist/l8.runtime.esm.js",
   "type": "module",
@@ -22,10 +22,10 @@
   "homepage": "https://github.com/l8js/l8#readme",
   "scripts": {
     "test": "jest",
-    "prepare" : "npx jsdoc ./src/ -r -d docs && npx node-git-hooks",
+    "prepare": "npx jsdoc ./src/ -r -d docs && npx node-git-hooks",
     "postinstall": "npx rollup -c"
   },
-  "dependencies" : {
+  "dependencies": {
     "rollup": "^2.50.5"
   },
   "devDependencies": {
