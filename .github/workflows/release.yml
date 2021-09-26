@@ -6,7 +6,15 @@ on:
 name: Create Release
 
 jobs:
+  test:
+    - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+          registry-url: "https://registry.npmjs.org"
+          - run: npm ci
+          - run: npm test
   build:
+    needs: test
     name: Create Release
     runs-on: ubuntu-latest
     steps:
@@ -22,3 +30,13 @@ jobs:
           release_name: Release ${{ github.ref }}
           draft: false
           prerelease: false
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+      steps:
+          - uses: actions/checkout@v2
+            with:
+              ref: ${{ github.event.release.target_commitish }}
+              - run: npm publish --access public
+                env:
+                  NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
