@@ -3,6 +3,8 @@
 [Site](https://github.com/l8js/l8) |
 [Twitter](https://twitter.com/ThorstenSuckow)
 
+Lightweight JavaScript library.
+
 **l8js** is released under the [MIT license](https://github.com/l8js/l8/blob/main/LICENSE.txt) & supports modern environments.
 
 
