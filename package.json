@@ -23,7 +23,8 @@
   "scripts": {
     "test": "jest",
     "prepare": "npx jsdoc ./src/ -r -d docs && npx node-git-hooks",
-    "postinstall": "npx rollup -c"
+    "postinstall": "npx rollup -c",
+    "postversion": "git push && git push --tags"
   },
   "dependencies": {
     "rollup": "^2.50.5"
