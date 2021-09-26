@@ -6,7 +6,6 @@ on:
     types: [ published ]
 
 jobs:
-
   publish:
     if: github.ref == 'refs/heads/main'
     needs: build
