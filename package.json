@@ -1,15 +1,11 @@
 {
   "name": "@l8js/l8",
-  "version": "0.2.0",
+  "version": "0.2.2",
   "description": "Lightweight core library for JavaScript projects",
   "main": "dist/l8.runtime.esm.js",
   "type": "module",
   "directories": {
     "test": "tests"
-  },
-  "scripts": {
-    "test": "jest",
-    "postinstall": "npx rollup -c && npx jsdoc ./src/ -r -d docs && node-git-hooks"
   },
   "repository": {
     "type": "git",
@@ -24,6 +20,14 @@
     "url": "https://github.com/l8js/l8/issues"
   },
   "homepage": "https://github.com/l8js/l8#readme",
+  "scripts": {
+    "test": "jest",
+    "prepare" : "npx jsdoc ./src/ -r -d docs && npx node-git-hooks",
+    "postinstall": "npx rollup -c"
+  },
+  "dependencies" : {
+    "rollup": "^2.50.5"
+  },
   "devDependencies": {
     "@babel/core": "^7.14.3",
     "@babel/preset-env": "^7.14.4",
@@ -31,7 +35,6 @@
     "eslint": "^7.27.0",
     "jest": "^27.0.1",
     "jsdoc": "^3.6.7",
-    "node-git-hooks": "^1.0.6",
-    "rollup": "^2.50.5"
+    "node-git-hooks": "^1.0.6"
   }
 }
