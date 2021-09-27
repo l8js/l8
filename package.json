@@ -27,13 +27,13 @@
     "postversion": "git push && git push --tags"
   },
   "devDependencies": {
-    "rollup": "^2.50.5",
     "@babel/core": "^7.14.3",
     "@babel/preset-env": "^7.14.4",
     "babel-jest": "^27.0.1",
     "eslint": "^7.27.0",
     "jest": "^27.0.1",
     "jsdoc": "^3.6.7",
-    "node-git-hooks": "^1.0.6"
+    "node-git-hooks": "^1.0.6",
+    "rollup": "^2.57.0"
   }
 }
