@@ -26,10 +26,8 @@
     "postinstall": "npx rollup -c",
     "postversion": "git push && git push --tags"
   },
-  "dependencies": {
-    "rollup": "^2.50.5"
-  },
   "devDependencies": {
+    "rollup": "^2.50.5",
     "@babel/core": "^7.14.3",
     "@babel/preset-env": "^7.14.4",
     "babel-jest": "^27.0.1",
