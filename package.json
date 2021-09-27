@@ -22,8 +22,8 @@
   "homepage": "https://github.com/l8js/l8#readme",
   "scripts": {
     "test": "jest",
-    "prepare": "npx jsdoc ./src/ -r -d docs && npx node-git-hooks",
-    "postinstall": "npx rollup -c",
+    "prepare": "npm run build && npx jsdoc ./src/ -r -d docs && npx node-git-hooks",
+    "build": "npx rollup -c",
     "postversion": "git push && git push --tags"
   },
   "devDependencies": {
