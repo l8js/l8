@@ -15,6 +15,12 @@ Using npm:
 $ npm i --save-dev @l8js/l8
 ```
 
+Use
+```shell
+$ npm run build:dev
+```
+for creating the dev environment.
+
 ## Usage
 npm's `postinstall` will take care of generating builds in `./dist/`. API docs are generated in `./docs`.
 

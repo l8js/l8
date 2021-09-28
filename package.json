@@ -21,10 +21,12 @@
   },
   "homepage": "https://github.com/l8js/l8#readme",
   "scripts": {
-    "test": "jest",
-    "postinstall": "npm run build && npx jsdoc ./src/ -r -d docs && npx node-git-hooks",
     "build": "npx rollup -c",
-    "postversion": "git push && git push --tags"
+    "build:docs" : "npx jsdoc ./src/ -r -d docs",
+    "build:dev": "npx node-git-hooks",
+    "postinstall": "npm run build && npm run build:docs",
+    "postversion": "git push && git push --tags",
+    "test": "jest"
   },
   "devDependencies": {
     "@babel/core": "^7.14.3",
