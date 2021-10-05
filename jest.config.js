@@ -13,5 +13,5 @@ export default {
     "testPathIgnorePatterns": [
         "/node_modules/"
     ],
-    "collectCoverage": true
+    "collectCoverage": false
 };
