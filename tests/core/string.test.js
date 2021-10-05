@@ -51,6 +51,7 @@ test("replace()", () => {
 
 test("unify()", () => {
     expect(() => l8.unify("foo", {})).toThrow(/must be a string/);
+    expect(() => l8.unify("foo", "")).toThrow(/must be a string/);
     expect(() => l8.unify({}, "foo")).toThrow(/must be a string/);
     expect(() => l8.unify("a", "foo", {})).toThrow(/must be an array or a string/);
 

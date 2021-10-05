@@ -101,7 +101,7 @@ export const replace = function (tokens, replace, target) {
  */
 export const unify = function (target, token, ignore) {
 
-    if (!l8.isString(target) || !l8.isString(token)) {
+    if (!l8.isString(target) || !l8.isString(token) || !token) {
         throw new Error("\"str\" must be a string");
     }
 
