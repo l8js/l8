@@ -53,15 +53,23 @@ test("unify()", () => {
     expect(() => l8.unify("foo", {})).toThrow(/must be a string/);
     expect(() => l8.unify({}, "foo")).toThrow(/must be a string/);
     expect(() => l8.unify("a", "foo", {})).toThrow(/must be an array or a string/);
-    
+
     expect( l8.unify("foo////bar/////c/a/", "/")).toBe("foo/bar/c/a/");
     expect( l8.unify("//foo////bar/////c/a//", "/")).toBe("/foo/bar/c/a/");
     expect( l8.unify("/foo/bar/////c/a/", "/")).toBe("/foo/bar/c/a/");
 
     expect(l8.unify("https://foo//bar////file/u", "/", ["https://"])).toBe("https://foo/bar/file/u");
     expect(l8.unify("https://foo//bar////file/u", "/", "://")).toBe("https://foo/bar/file/u");
-    expect(l8.unify("https://foo//://////bar////file/u", "/", ["://", "://"])).toBe("https://foo/:///bar/file/u");
-    expect(l8.unify("ht:://tps://foo//://////bar////file/u", "/", ["://", ":://"])).toBe("ht:://tps://foo/:///bar/file/u");
+    expect(l8.unify("https://foo//://////bar////file/u", "/", ["://", "://"])).toBe("https://foo/://bar/file/u");
+    expect(l8.unify("ht:://tps://foo//://////bar////file/u", "/", ["://", ":://"])).toBe("ht:://tps://foo/://bar/file/u");
+
+    expect(l8.unify("https://LJlkhj/kjhkjhgb///", "/", "://")).toBe("https://LJlkhj/kjhkjhgb/");
+
+    expect(l8.unify("host:///endpoint//", "/", "://")).toBe("host://endpoint/");
+    expect(l8.unify("cn_mail", "/", "://")).toBe("cn_mail");
+
+    expect(l8.unify("cn_m///ail", "/", "://")).toBe("cn_m/ail");
+
 });
 
 

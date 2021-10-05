@@ -92,10 +92,10 @@ export const replace = function (tokens, replace, target) {
  *
  * @param {String} token
  * @param {String} target
- * @param {Array|String} ignore Array with tokens to ignore
+ * @param {Array|String} ignore Array with tokens to ignore. Makes sure String gets sanitized first.
  *
  * @example
- *  l8.unify("https://foo//bar////file/u", "/", ["https"]); // https://foo/bar/file/u
+ *  l8.unify("https://///foo//bar////file/u", "/", ["https"]); // https://foo/bar/file/u
  *
  * throws {Error} if target or token are not strings, or if ignore is not an array
  */
@@ -113,10 +113,16 @@ export const unify = function (target, token, ignore) {
 
     if (ignore !== undefined) {
 
+        // sanitize first
         ignore = [].concat(ignore);
-        ignore.map((val) => escapeRegExp(val));
-        ignore = new RegExp(`(${ignore.join("|")})`, "gim");
+        ignore = ignore.map((val) => escapeRegExp(val));
+        ignore.map((val) => {
+            let sanitizer = new RegExp(`(${escapeRegExp(val) + "*"})`, "gim");
+            target = target.replace(sanitizer, val);
+        });
 
+
+        ignore = new RegExp(`(${ignore.join("|")})`, "gim");
         let rem = "",
             pos = 0,
             res = [],
@@ -128,41 +134,17 @@ export const unify = function (target, token, ignore) {
                 return match;
             };
 
-        target.replace(ignore, replacer);
-        res.push(rem.replace(lookup, token));
-        return res.join("");
-    } else {
-        return target.replace(lookup, token);
+        if (target.match(ignore, replacer)) {
+            target.replace(ignore, replacer);
+            res.push(rem.replace(lookup, token));
+            return res.join("");
+        } else {
+            return target.replace(lookup, token);
+        }
+
     }
 
-
-    /*
-    return target.split(token).filter(
-        (x, index, source) => index === 0 || index === source.length - 1 || x !== ""
-    ).join(token);
-*/
-
-    /**
-     var str = 'Das// sollte////////////////////manhttps://guthttp://lesen///https://kö///n/ne/n';
-     var unify = "", res=[], rem = "";
-     var pos = 0;
-     let lookup = new RegExp("/+", "gi");
-     let replacer = (match, contents, offsets, inputString) => {
-	str = inputString.substring(pos, offsets).replace(lookup, unify);
-  res = res.concat([str, contents]);
-  pos = offsets + match.length;
-  rem = inputString.substring(pos);
-  return match;
-};
-
-
-     str.replace(/(http\:\/\/|https\:\/\/)/gim, replacer);
-     res.push(rem.replace(lookup, unify));
-
-
-     console.log(res)
-
-     */
+    return target.replace(lookup, token);
 
 };
 
