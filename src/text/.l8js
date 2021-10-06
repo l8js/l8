@@ -23,6 +23,7 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-export * from "./core/.l8js";
-export * as text from "./text/.l8js";
-export * as template from "./template/.l8js";
+export {default as toBlockquote} from "./toBlockquote.js";
+export {default as toEmailLink} from "./toEmailLink.js";
+export {default as toHyperlink} from "./toHyperlink.js";
+export {default as toLineBreak} from "./toLineBreak.js";
