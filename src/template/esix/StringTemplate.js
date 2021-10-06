@@ -36,7 +36,7 @@ import StringCompiler from "./StringCompiler.js";
  *
  * @class StringTemplate
  */
-export default class extends Template {
+export default class StringTemplate extends Template {
 
 
     /**
@@ -100,6 +100,9 @@ export default class extends Template {
 
         return me.compiledTpls[cplKey].render(data);
     }
-
-
 }
+
+/* Sugar! */
+const make = txt => new StringTemplate(txt);
+
+export {make};
