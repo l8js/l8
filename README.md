@@ -1,4 +1,5 @@
-# l8js
+# l8js ![MIT](https://img.shields.io/npm/l/@l8js/l8) [![npm version](https://badge.fury.io/js/@l8js%2Fl8.svg)](https://npm.org/@l8js/l8) ![build](https://github.com/l8js/l8/actions/workflows/test.yml/badge.svg)
+
 
 (_Read: **light** js_)
 
