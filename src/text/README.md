@@ -1,10 +1,4 @@
-# l8.text.transformer.html
-
-The transformers found in this package are responsible for changing plain texts
-into texts containing HTML-code.
-
-
-## BlockquoteTransformer
+## toBlockquote
 Will parse a given text and look up quote marks (">"), interpret them as quoted
 text and apply "\<blockquote\>"-tags accordingly.
 
@@ -30,7 +24,7 @@ I hereby respond:
 </blockquote>
 ````
 
-## EmailAddressTransformer 
+## toEmailLink 
 Will parse the given text and look up text fragments matching an EmailAddress-pattern, and create
 "\<a\>"-tags out of them where the href-attribute's value is prefixed with a "mailto".  
 
@@ -44,7 +38,7 @@ will be transformed to:
 Please contact <a href="mailto:info@conjoon.org">info@conjoon.org</a> for further informations.
 ````
 
-## HyperlinkTransformer 
+## toHyperlink 
 Will parse the given text and look up text fragments matching an URL-pattern, and create
 "\<a\>"-tags out of them.  
 
@@ -61,7 +55,7 @@ take place in the kitchen.
 
 ````
 
-## LineBreakTransformer 
+## toLineBreak 
 Will parse the given text and look up line breaks and and create "\<br /\>"-tags out of them.  
 
 ### Example:

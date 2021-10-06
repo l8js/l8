@@ -23,7 +23,42 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-export {default as BlockquoteTransformer} from "./BlockquoteTransformer.js";
-export {default  as EmailAddressTransformer} from "./EmailAddressTransformer.js";
-export {default  as HyperlinkTransformer} from "./HyperlinkTransformer.js";
-export {default  as LineBreakTransformer} from "./LineBreakTransformer.js";
+/**
+ * @module l8/text/html
+ */
+
+
+/**
+ * Transformer for transforming plain text containing Email-Addresses
+ * into text that wraps those Email-Addreses in "<a>"-tags along with the href-attribute's
+ * value (i.e. the Email-Address itself) prefixed with "mailto:"
+ *
+ * @example
+ *  import transform from "./toEmailAddress.js";
+ *
+ *  let text = "Please contact info@conjoon.com for further information.";
+ *
+ *  transform(text);
+ *
+ *  // returns:
+ *  // Please contact <a href="mailto:infi@conjoon.com">info@conjoon.com</a> for further information.
+ *
+ */
+
+
+/**
+ * Invokes transforming the passed string.
+ *
+ * @param {String} value
+ *
+ * @return {String}
+ */
+export default text => {
+
+    const emailRegex = /[a-zA-Z0-9+._%-]{1,256}@[a-zA-Z0-9][a-zA-Z0-9-]{0,64}(\.[a-zA-Z0-9][a-zA-Z0-9-]{0,25})+/gi;
+
+    text = text.replace(emailRegex, matches => ("<a href=\"mailto:" + matches + "\">" + matches + "</a>"));
+
+    return text;
+
+};

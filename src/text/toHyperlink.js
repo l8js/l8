@@ -23,4 +23,40 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-export * as transformer from "./transformer/.l8js";
+/**
+ * @module l8/text/html
+ */
+
+
+/**
+ * Transformer for transforming plain-text containing Hyperlinks
+ * into text that wraps those Hyperlinks in "<a>"-tags.
+ *
+ * @example
+ *
+ *  import transform from "./toHyperlink.js";
+ *
+ *  let text = "This is an url https://www.conjoon.org and it is not clickable";
+ *
+ *  transform(text);
+ *
+ *  // returns:
+ *  // This is an url <a href="https://www.conjoon.org">https://www.conjoon.org</a> and it is not clickable
+ *
+ */
+
+/**
+ * Invokes transforming the passed string.
+ *
+ * @param {String} value
+ *
+ * @return {String}
+ */
+export default text => {
+
+    const urlRegex = /(\b(https?):\/\/[-A-Z0-9+&@#/%?=~_|!:,.;]*[-A-Z0-9+&@#/%=~_|])/ig;
+
+    text = text.replace(urlRegex, matches => ("<a href=\"" + matches + "\">" + matches + "</a>"));
+
+    return text;
+};
