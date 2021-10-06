@@ -1,5 +1,6 @@
 name: Github Package Release
 on:
+  workflow_dispatch:
   release:
     types: [created]
 jobs:
