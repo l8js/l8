@@ -23,4 +23,40 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-export {default as FileLoader} from "./FileLoader.js";
+/**
+ * @module l8/text/html
+ */
+
+
+/**
+ * Transformer for transforming plain text containing line breaks (\r, \r\n, \n)
+ * into text that replaces the line breaks with "<br />"-tags.
+ *
+ * @example
+ *
+ *  import transform from "./toLineBreak.js";
+ *
+ *  let text = "Please\n don't\n\n wrap\nme";
+ *
+ *  transform(text);
+ *
+ *  // returns:
+ *  // Please<br /> don't<br /><br /> wrap<br />me
+ *
+ */
+
+/**
+ * Invokes transforming the passed string.
+ *
+ * @param {String} value
+ *
+ * @return {String}
+ */
+export default text => {
+
+    const regex = /(\r\n|\n|\r)/gm;
+
+    text = text.replace(regex, matches => ("<br />"));
+
+    return text;
+};

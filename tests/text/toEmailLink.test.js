@@ -23,22 +23,20 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import EmailAddressTransformer from "../../../../src/text/transformer/html/EmailAddressTransformer.js";
+import transform from "../../src/text/toEmailLink.js";
 
 
-test("transform()", () =>{
-
-    let transformer = new EmailAddressTransformer;
+test("toEmailLink", () =>{
 
     let text = "Please contact info@conjoon.com for further information.";
 
-    expect(transformer.transform(text)).toBe(
+    expect(transform(text)).toBe(
         "Please contact <a href=\"mailto:info@conjoon.com\">info@conjoon.com</a> for further information."
     );
 
     text = "Please contact info-test@conjoon-domain-info.com for further information.";
 
-    expect(transformer.transform(text)).toBe(
+    expect(transform(text)).toBe(
         "Please contact <a href=\"mailto:info-test@conjoon-domain-info.com\">info-test@conjoon-domain-info.com</a> for further information."
     );
 

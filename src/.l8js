@@ -26,4 +26,3 @@
 export * from "./core/.l8js";
 export * as text from "./text/.l8js";
 export * as template from "./template/.l8js";
-export * as request from "./request/.l8js";

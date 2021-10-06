@@ -1,5 +1,7 @@
 # l8js
 
+(_Read: **light** js_)
+
 [Site](https://github.com/l8js/l8) |
 [Twitter](https://twitter.com/ThorstenSuckow)
 
@@ -82,6 +84,11 @@ Examples:
     str = l8.replace("A", "B", "A"); // B    
     
     
+    // l8.unify
+    let str = l8.unify("https:///HOST///api/endpoint//", "/", "://");
+    console.log(str); // https://HOST/api/endpoint/"
+    
+    
     // l8.groupIndices
     var list   = ['4', 5, '1', '3', 6, '8'];
     l8.groupIndices(list); // [[1], [3, 4, 5, 6], [8]]
@@ -96,17 +103,26 @@ Examples:
     await l8.liquify(source).foo().bar().snafu();
     
     
-    // l8.request.FileLoader.load
-    const fileLoader = new l8.request.FileLoader();
-    const text = await fileLoader.load("./README.md");
+    // l8.load
+    const text = await l8.load("./README.md");
     console.log(res); // response text
 
 
-    // l8.request.FileLoader.ping - sends HEAD to resource
-    const fileLoader = new l8.request.FileLoader();
-    const exists = await fileLoader.ping("./README.md");
+    // l8.ping - sends HEAD to resource
+    const exists = await l8.ping("./README.md");
     console.log(exists); // true or false
+    
 
+    // l8.text.toHyperlink - l8.text provides parser-/transformation-utilities 
+    const html = l8.text.toHyperlink("This is an url https://www.conjoon.org and it is not clickable");
+    console.log(html); // This is an url <a href="https://www.conjoon.org">https://www.conjoon.org</a> and it is not clickable
 
+    
+    // l8.template.esix.StringTemplate - Template Engine supporting ES6 String Templates.
+    let tpl = l8.template.esix.StringTemplate.make("This is a ${templated} string ${that.supports} JavaScript TemplateStrings");
+    console.log(tpl.render({templated : "parsed", that : {supports : "that supports"}}));
+    // This is a parsed string that supports JavaScript TemplateStrings
+    
+    
     // ... and many more
 ```

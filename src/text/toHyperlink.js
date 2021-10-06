@@ -23,21 +23,40 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import HyperlinkTransformer from "../../../../src/text/transformer/html/HyperlinkTransformer.js";
+/**
+ * @module l8/text/html
+ */
 
 
-test("transform()", () =>{
+/**
+ * Transformer for transforming plain-text containing Hyperlinks
+ * into text that wraps those Hyperlinks in "<a>"-tags.
+ *
+ * @example
+ *
+ *  import transform from "./toHyperlink.js";
+ *
+ *  let text = "This is an url https://www.conjoon.org and it is not clickable";
+ *
+ *  transform(text);
+ *
+ *  // returns:
+ *  // This is an url <a href="https://www.conjoon.org">https://www.conjoon.org</a> and it is not clickable
+ *
+ */
 
-    let transformer = new HyperlinkTransformer;
+/**
+ * Invokes transforming the passed string.
+ *
+ * @param {String} value
+ *
+ * @return {String}
+ */
+export default text => {
 
-    let text = "https://www.conjoon.org is an url " +
-                       "and https://conjoon.com/?schedule=1&foo=bar#localanchor/is/here/too";
+    const urlRegex = /(\b(https?):\/\/[-A-Z0-9+&@#/%?=~_|!:,.;]*[-A-Z0-9+&@#/%=~_|])/ig;
 
-    expect(transformer.transform(text)).toBe(
-        "<a href=\"https://www.conjoon.org\">https://www.conjoon.org</a> is an url " +
-                "and <a href=\"https://conjoon.com/?schedule=1&foo=bar#localanchor/is/here/too\">https://conjoon.com/?schedule=1&foo=bar#localanchor/is/here/too</a>"
-    );
+    text = text.replace(urlRegex, matches => ("<a href=\"" + matches + "\">" + matches + "</a>"));
 
-});
-
-
+    return text;
+};

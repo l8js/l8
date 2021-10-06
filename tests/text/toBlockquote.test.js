@@ -23,15 +23,13 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import BlockquoteTransformer from "../../../../src/text/transformer/html/BlockquoteTransformer.js";
+import {default as transformBlockquote, group, sanitizeLine} from "../../src/text/toBlockquote.js";
 
 test("sanitizeLine()", () =>{
 
-    let transformer = new BlockquoteTransformer;
-
     let line = " > >    Text that does 1";
 
-    expect(transformer.sanitizeLine(line)).toBe(
+    expect(sanitizeLine(line)).toBe(
         ">> Text that does 1"
     );
 
@@ -39,8 +37,6 @@ test("sanitizeLine()", () =>{
 
 
 test("group()", () =>{
-
-    let transformer = new BlockquoteTransformer;
 
     let text = [
         " > This is",
@@ -54,7 +50,7 @@ test("group()", () =>{
         "          >>YO!"
     ].join("\n");
 
-    expect(transformer.group(text)).toEqual([
+    expect(group(text)).toEqual([
         ["> This is", "> some quoted", ">> Text that does 1", ">> Text that does 2", ">hm good"],
         ["stuff that", "usually likes"],
         [">> to be parsed", ">>YO!"]
@@ -63,7 +59,7 @@ test("group()", () =>{
 });
 
 
-test("transform()", () =>{
+test("toBlockquote", () =>{
 
     let text = [
         " > This is",
@@ -77,9 +73,7 @@ test("transform()", () =>{
         ">>YO!"
     ].join("\n");
 
-    let transformer = new BlockquoteTransformer;
-
-    expect(transformer.transform(text)).toBe(
+    expect(transformBlockquote(text)).toBe(
         "<blockquote> This is\n some quoted<blockquote>" +
                 " Text that does 1\n Text that does 2</blockquote>hm good</blockquote>stuff that\nusually likes"+
                 "<blockquote><blockquote> to be parsed\nYO!</blockquote></blockquote>"

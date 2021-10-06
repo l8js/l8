@@ -23,4 +23,7 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-export * as transformer from "./transformer/.l8js";
+export {default as toBlockquote} from "./toBlockquote.js";
+export {default as toEmailLink} from "./toEmailLink.js";
+export {default as toHyperlink} from "./toHyperlink.js";
+export {default as toLineBreak} from "./toLineBreak.js";

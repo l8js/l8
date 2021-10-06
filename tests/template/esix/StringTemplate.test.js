@@ -24,7 +24,7 @@
  */
 
 import Template from "../../../src/template/Template.js";
-import StringTemplate from "../../../src/template/esix/StringTemplate.js";
+import {make, default as StringTemplate} from "../../../src/template/esix/StringTemplate.js";
 import StringCompiler from "../../../src/template/esix/StringCompiler.js";
 
 let inst;
@@ -60,6 +60,10 @@ test("functionality", () => {
     expect(inst.compiler).toBeInstanceOf(StringCompiler);
     expect(inst.tpl).toBe(tpl);
     expect(inst.compiledTpl).toBeUndefined();
+
+    const made = make(tpl);
+    expect(made).toBeInstanceOf(StringTemplate);
+    expect(made.tpl).toBe(tpl);
 });
 
 

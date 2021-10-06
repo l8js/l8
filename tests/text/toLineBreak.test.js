@@ -23,16 +23,14 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import LineBreakTransformer from "../../../../src/text/transformer/html/LineBreakTransformer.js";
+import transform from "../../src/text/toLineBreak.js";
 
 
 test("transform()", () =>{
 
-    let transformer = new LineBreakTransformer;
-
     let text = "Please \r\n do\rnot \n\nWRAP\n\rmE\r\rNOW";
 
-    expect(transformer.transform(text)).toBe(
+    expect(transform(text)).toBe(
         "Please <br /> do<br />not <br /><br />WRAP<br /><br />mE<br /><br />NOW"
     );
 
