@@ -71,6 +71,9 @@ test("unify()", () => {
 
     expect(l8.unify("cn_m///ail", "/", "://")).toBe("cn_m/ail");
 
+    expect(l8.unify("https://php-ms-imapuser.ddev.site/rest-imapuser/api/v0.1", "/", "://")).toBe(
+        "https://php-ms-imapuser.ddev.site/rest-imapuser/api/v0.1");
+
 });
 
 
