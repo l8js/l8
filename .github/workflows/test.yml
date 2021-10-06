@@ -1,5 +1,5 @@
 on:
-  commit
+  push
   
 name: Tests
 
