@@ -1,7 +1,6 @@
-# l8js ![MIT](https://img.shields.io/npm/l/@l8js/l8) [![npm version](https://badge.fury.io/js/@l8js%2Fl8.svg)](https://npmjs.org/@l8js/l8) ![build](https://github.com/l8js/l8/actions/workflows/test.yml/badge.svg)
+# @l8js/l8 ![MIT](https://img.shields.io/npm/l/@l8js/l8) [![npm version](https://badge.fury.io/js/@l8js%2Fl8.svg)](https://npmjs.org/@l8js/l8) ![build](https://github.com/l8js/l8/actions/workflows/test.yml/badge.svg) 
 
-
-(_Read: **light** js_)
+#### l8js (_Read: light js_)
 
 [Site](https://github.com/l8js/l8) |
 [Twitter](https://twitter.com/ThorstenSuckow)
@@ -123,7 +122,7 @@ Examples:
     let tpl = l8.template.esix.StringTemplate.make("This is a ${templated} string ${that.supports} JavaScript TemplateStrings");
     console.log(tpl.render({templated : "parsed", that : {supports : "that supports"}}));
     // This is a parsed string that supports JavaScript TemplateStrings
-    
+    => returns: liquify(target[property].bind(target))
     
     // ... and many more
 ```
