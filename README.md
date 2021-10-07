@@ -1,4 +1,4 @@
-# @l8js/l8 ![MIT](https://img.shields.io/npm/l/@l8js/l8) [![npm version](https://badge.fury.io/js/@l8js%2Fl8.svg)](https://npmjs.org/@l8js/l8) ![build](https://github.com/l8js/l8/actions/workflows/test.yml/badge.svg) 
+# @l8js/l8 ![MIT](https://img.shields.io/npm/l/@l8js/l8) [![npm version](https://badge.fury.io/js/@l8js%2Fl8.svg)](https://npmjs.org/@l8js/l8) ![build](https://github.com/l8js/l8/actions/workflows/run.tests.yml/badge.svg) 
 
 #### l8js (_Read: light js_)
 

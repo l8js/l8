@@ -1,6 +1,7 @@
 on:
   release:
-    types: [ created ]
+    types:
+      - created
 
 name:  npmjs - package publish
 
