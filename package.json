@@ -31,10 +31,12 @@
     "release:patch": "standard-version --release-as patch",
     "release:minor": "standard-version --release-as minor",
     "release:major": "standard-version --release-as major"
-},
+  },
   "devDependencies": {
     "@babel/core": "^7.14.3",
     "@babel/preset-env": "^7.14.4",
+    "@commitlint/cli": "^13.2.0",
+    "@commitlint/config-conventional": "^13.2.0",
     "babel-jest": "^27.0.1",
     "eslint": "^7.27.0",
     "husky": "^7.0.0",
@@ -42,7 +44,6 @@
     "jest-fetch-mock": "^3.0.3",
     "jsdoc": "^3.6.7",
     "rollup": "^2.57.0",
-    "@commitlint/cli": "^13.2.0",
-    "@commitlint/config-conventional": "^13.2.0"
+    "standard-version": "^9.3.1"
   }
 }
