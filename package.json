@@ -23,20 +23,28 @@
   "scripts": {
     "build": "npx rollup -c",
     "build:docs": "npx jsdoc ./src/ -r -d docs",
-    "build:dev": "npx node-git-hooks",
     "postinstall": "npm run build && npm run build:docs",
     "postversion": "git push && git push --tags",
-    "test": "jest"
-  },
+    "test": "jest",
+    "prepare": "husky install",
+    "release": "standard-version",
+    "release:patch": "standard-version --release-as patch",
+    "release:minor": "standard-version --release-as minor",
+    "release:major": "standard-version --release-as major"
+},
   "devDependencies": {
     "@babel/core": "^7.14.3",
     "@babel/preset-env": "^7.14.4",
     "babel-jest": "^27.0.1",
     "eslint": "^7.27.0",
+    "husky": "^7.0.0",
     "jest": "^27.0.1",
     "jest-fetch-mock": "^3.0.3",
     "jsdoc": "^3.6.7",
-    "node-git-hooks": "^1.0.6",
     "rollup": "^2.57.0"
+  },
+  "dependencies": {
+    "@commitlint/cli": "^13.2.0",
+    "@commitlint/config-conventional": "^13.2.0"
   }
 }
