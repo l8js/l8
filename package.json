@@ -1,6 +1,6 @@
 {
   "name": "@l8js/l8",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Lightweight core library for JavaScript projects",
   "main": "dist/l8.runtime.esm.js",
   "type": "module",
@@ -28,9 +28,9 @@
     "test": "jest",
     "prepare": "husky install",
     "release": "standard-version",
-    "release:patch": "standard-version --release-as patch",
-    "release:minor": "standard-version --release-as minor",
-    "release:major": "standard-version --release-as major"
+    "release:patch": "standard-version --release-as patch && npm run postversion",
+    "release:minor": "standard-version --release-as minor && npm run postversion",
+    "release:major": "standard-version --release-as major && npm run postversion"
   },
   "devDependencies": {
     "@babel/core": "^7.14.3",

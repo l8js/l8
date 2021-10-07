@@ -1,3 +1,9 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [0.5.1](https://github.com/l8js/l8/compare/v0.5.0...v0.5.1) (2021-10-07)
+
 ## 0.5.0 (2021-10-06)
 
 * - enhancement: added jest-fetch-mock for mocking fetch() ([185bdb4](https://github.com/l8js/l8/commit/185bdb4))
@@ -137,6 +143,3 @@
 * 0.3.3 ([6a13468](https://github.com/l8js/l8/commit/6a13468))
 * initial commit ([ebe37a5](https://github.com/l8js/l8/commit/ebe37a5))
 * Initial commit ([840b261](https://github.com/l8js/l8/commit/840b261))
-
-
-
