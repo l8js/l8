@@ -1,8 +1,10 @@
-name: Github Package Release
+
+name: [github] package publish
+
 on:
-  workflow_dispatch:
   release:
     types: [created]
+
 jobs:
   build:
     runs-on: ubuntu-latest 
@@ -15,7 +17,6 @@ jobs:
         with:
           node-version: 16
           registry-url: 'https://npm.pkg.github.com'
-          # Defaults to the user or organization that owns the workflow file
           scope: '@l8js'
       - run: npm publish
         env:
