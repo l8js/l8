@@ -1,8 +1,8 @@
 on:
   release:
-    types: [created]
-    
-name: [github] package publish
+    types: [ created ]
+
+name: github - package publish
 
 jobs:
   build:
@@ -20,4 +20,3 @@ jobs:
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
