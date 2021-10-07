@@ -1,9 +1,8 @@
-
-name:  [npmjs] package publish
-
 on:
   release:
     types: [ created ]
+
+name:  [npmjs] package publish
 
 jobs:
   publish:
