@@ -81,7 +81,7 @@ manipulating data in JavaScript. It also provides syntactical sugar for convenie
     let tpl = l8.template.esix.StringTemplate.make("This is a ${templated} string ${that.supports} JavaScript TemplateStrings");
     console.log(tpl.render({templated : "parsed", that : {supports : "that supports"}}));
     // This is a parsed string that supports JavaScript TemplateStrings
-    => returns: liquify(target[property].bind(target))
+
     
     // ... and many more
 ```
