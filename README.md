@@ -5,57 +5,16 @@
 [Site](https://github.com/l8js/l8) |
 [Twitter](https://twitter.com/ThorstenSuckow)
 
-Lightweight JavaScript library.
+Lightweight JavaScript library. 
+<br> Skipping bold abstraction layers for the sake of a more lean approach towards functional programming.
 
 **l8js** is released under the [MIT license](https://github.com/l8js/l8/blob/main/LICENSE.txt) & supports modern environments.
 
-
-## Installation
-
-Using npm:
-```shell
-$ npm i --save-dev @l8js/l8
-```
-
-Use
-```shell
-$ npm run build:dev
-```
-for creating the dev environment.
-
-## Usage
-npm's `postinstall` will take care of generating builds in `./dist/`. API docs are generated in `./docs`.
-
-### Module Formats
-#### Default JS Module export
-Provides default JS-Module export for the whole [l8js-library](https://github.com/l8js/l8).
-
-```javascript
-import l8 from "./dist/l8.runtime.esm.js";
-```
-
-
-#### Named JS module exports
-Provides named JS-Module exports for the main-packages of [l8js-library](https://github.com/l8js/l8).
-
-```javascript
-import {core, template, text} from "./dist/l8.packages.esm.js";
-```
-
-
-#### Universal Module Definition (UMD)
-Provides a Universal Module Definition for the whole [l8js-library](https://github.com/l8js/l8).
-
-```html
-<script type="text/javascript" src="./dist/l8.runtime.umd.js" />
-```
-
 ## Why l8js?
-[l8js](https://github.com/l8js/l8) provides wrappers and thin abstraction layers to ease the process of accessing and
-manipulating data in JavaScript. It also provides syntactical sugar for convenient access to language
-specific functions.
+[l8js](https://github.com/l8js/l8) provides functionality, wrappers and thin(!) abstraction layers to ease the process of accessing and
+manipulating data in JavaScript. It also provides syntactical sugar for convenient access to language specific functions.
 
-Examples:
+
 ```javascript
     
     // l8.chain
@@ -126,3 +85,45 @@ Examples:
     
     // ... and many more
 ```
+
+
+## Installation
+
+Using npm:
+```shell
+$ npm i --save-dev @l8js/l8
+```
+
+Use
+```shell
+$ npm run build:dev
+```
+for creating the dev environment.
+
+## Usage
+npm's `postinstall` will take care of generating builds in `./dist/`. API docs are generated in `./docs`.
+
+### Module Formats
+#### Default JS Module export
+Provides default JS-Module export for the whole [l8js-library](https://github.com/l8js/l8).
+
+```javascript
+import l8 from "./dist/l8.runtime.esm.js";
+```
+
+
+#### Named JS module exports
+Provides named JS-Module exports for the main-packages of [l8js-library](https://github.com/l8js/l8).
+
+```javascript
+import {core, template, text} from "./dist/l8.packages.esm.js";
+```
+
+
+#### Universal Module Definition (UMD)
+Provides a Universal Module Definition for the whole [l8js-library](https://github.com/l8js/l8).
+
+```html
+<script type="text/javascript" src="./dist/l8.runtime.umd.js" />
+```
+
