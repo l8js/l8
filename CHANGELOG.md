@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.5.3](https://github.com/l8js/l8/compare/v0.5.2...v0.5.3) (2021-10-14)
+
+
+### Features
+
+* add extract to array-module ([07ae577](https://github.com/l8js/l8/commit/07ae5773c0909c32845856f3ed29714584edbca6))
+
+
+### Bug Fixes
+
+* subsequent pre-commit hooks execute if the previous succeeds ([64ef822](https://github.com/l8js/l8/commit/64ef8220dcd627ac9df9240dac939b5e0a919e87))
+
 ### [0.5.2](https://github.com/l8js/l8/compare/v0.5.1...v0.5.2) (2021-10-07)
 
 ### [0.5.1](https://github.com/l8js/l8/compare/v0.5.0...v0.5.1) (2021-10-07)
