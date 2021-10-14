@@ -1,6 +1,6 @@
 {
   "name": "@l8js/l8",
-  "version": "0.5.3",
+  "version": "0.5.2",
   "description": "Lightweight core library for JavaScript projects",
   "main": "dist/l8.runtime.esm.js",
   "type": "module",
@@ -26,6 +26,7 @@
     "postinstall": "npm run build && npm run build:docs",
     "test": "jest",
     "prepare": "npx node-git-hooks",
+    "postversion": "git push && git push --tags",
     "release": "standard-version",
     "release:patch": "standard-version --release-as patch && npm run postversion",
     "release:minor": "standard-version --release-as minor && npm run postversion",
