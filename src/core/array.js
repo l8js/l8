@@ -209,3 +209,19 @@ export const findFirst = (key, source) => {
     return match;
 };
 
+
+/**
+ * Extracts all unique values from the given array.
+ *
+ * @example
+ *  l8.extract([1, 2, 3, 2, 5, 767, 4, 3, 2]);
+ *  // returns [1, 5, 767, 4]
+ *
+ * @param {Array} arr
+ *
+ * @return {Array}
+ */
+export const extract = (arr) => arr.filter(
+    (item, index, arr) => arr.indexOf(item) === arr.lastIndexOf(item)
+);
+

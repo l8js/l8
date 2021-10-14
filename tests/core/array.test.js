@@ -121,3 +121,18 @@ test("findFirst()", () => {
     expect(l8.findFirst("bar", arr)).toBe(arr[1].bar);
 
 });
+
+
+test("extract()", () => {
+
+    let a = [1, 2, 3, 4, 3, 2, 5, 6, 3, 2, 1, 7, 9, 10],
+        b = [1, 2, 3, 4, 3, 2, 5, 6, 3, 2, 1, 7, 9, 10];
+    expect([]).toEqual(l8.extract(a.concat(b)));
+
+    a = [1, 2, 3, 4, 3, 2, 5, 6, 3, 2, 1, 7, 9, 10],
+    b = [1, 2, 3, 4, 3, 2, 5, 6, 3, 2, 1, 9, 10];
+    expect([7]).toEqual(l8.extract(a.concat(b)));
+
+    expect([1, 5, 767, 4]).toEqual(l8.extract([1, 2, 3, 2, 5, 767, 4, 3, 2]));
+
+});
