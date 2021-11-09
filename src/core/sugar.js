@@ -36,7 +36,7 @@
 export const isString = target => typeof target === "string";
 
 /**
- * 
+ *
  * @param target
  * @return {boolean}
  */
@@ -53,7 +53,7 @@ export const isPlainObject = target => typeof target === "object" &&
                                        target.constructor === Object;
 
 /**
- * 
+ *
  * @param target
  * @return {boolean}
  */
@@ -81,7 +81,7 @@ export const isArray = target =>  Array.isArray ? Array.isArray(target) : Object
 export const isRegExp = target => target instanceof RegExp;
 
 /**
- * 
+ *
  * @param target
  * @return {{a: (function(*): boolean), of: (function(*): boolean)}}
  */

@@ -31,6 +31,28 @@ import * as l8 from "./sugar.js";
 import * as string from "./string.js";
 
 /**
+ * Returns an object created from the null object. Key/value pairs from the specified
+ * source will be used as the initial configuration for this object, by calling
+ * Object.assign.
+ *
+ * @example
+ *   const obj = l8.obj({"key": "value", "property": {"key2": "value1"}});
+ *
+ * @param {Object} source An optional source object used to copy the key/value pairs from
+ * into the object being created with this method. Objects used as values in source will
+ * be referenced, not copied.
+ *
+ * @return {Object}
+ */
+export const obj = function (source) {
+    const obj = Object.create(null);
+    Object.assign(obj, source);
+
+    return obj;
+};
+
+
+/**
  * Creates a none-configurable, none-writeable (list of) propert(y|ies) on the target object.
  *
  * @example
