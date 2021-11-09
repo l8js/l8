@@ -1,4 +1,4 @@
-# @l8js/l8 ![MIT](https://img.shields.io/npm/l/@l8js/l8) [![npm version](https://badge.fury.io/js/@l8js%2Fl8.svg)](https://npmjs.org/@l8js/l8) ![build](https://github.com/l8js/l8/actions/workflows/run.tests.yml/badge.svg) 
+# @l8js/l8 ![MIT](https://img.shields.io/npm/l/@l8js/l8) [![npm version](https://badge.fury.io/js/@l8js%2Fl8.svg)](https://npmjs.org/@l8js/l8)  ![build](https://github.com/l8js/l8/actions/workflows/run.tests.yml/badge.svg) 
 
 #### l8js (_Read: light js_)
 
@@ -17,6 +17,11 @@ manipulating data in JavaScript. It also provides syntactical sugar for convenie
 
 ```javascript
     
+    // create object based on null object
+    let obj = l8.obj();
+    obj.key = "value";
+    obj instanceof Object; // false
+
     // l8.chain
     let obj = {};
     l8.chain("a.b.c.d", obj, "foo"); // obj is { a : { b : {c : { d : "foo"}}}}
@@ -126,4 +131,3 @@ Provides a Universal Module Definition for the whole [l8js-library](https://gith
 ```html
 <script type="text/javascript" src="./dist/l8.runtime.umd.js" />
 ```
-

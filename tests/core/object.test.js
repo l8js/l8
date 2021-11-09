@@ -25,7 +25,7 @@
 
 import * as l8 from "../../src/core/object.js";
 
-test("lck", () => {
+test("lock", () => {
 
     const
         extensible = {},
@@ -218,4 +218,21 @@ test("assign()", () => {
         {"foo": "bar", "key": "value"}
     );
 
+});
+
+
+test("obj()", () => {
+
+    let obj = l8.obj();
+
+    expect(typeof obj).toBe("object");
+    expect(obj instanceof Object).toBe(false);
+
+    const source = {key: "value", property: {key1: "value1"}};
+    obj = l8.obj(source);
+
+    expect(typeof obj).toBe("object");
+    expect(obj instanceof Object).toBe(false);
+    expect(obj.key).toBe("value");
+    expect(obj.property).toBe(source.property);
 });
