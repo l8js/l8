@@ -38,6 +38,7 @@
     "@commitlint/cli": "^13.2.0",
     "@commitlint/config-conventional": "^13.2.0",
     "babel-jest": "^27.0.1",
+    "babel-plugin-rewire": "^1.2.0",
     "eslint": "^7.27.0",
     "jest": "^27.0.1",
     "jest-fetch-mock": "^3.0.3",
