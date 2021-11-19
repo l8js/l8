@@ -47,6 +47,15 @@ export default class extends Compiler {
      * @inheritdoc
      */
     compile (txt, keys) {
+
+        keys.some(key => {
+            if (key.indexOf("-") !== -1) {
+                throw new Error(
+                    `Cannot compile template: Contains invalid key-name: ${key}`
+                );
+            }
+        });
+
         const
             me = this,
             tplKeys = me.getKeys(txt),
@@ -109,11 +118,11 @@ export default class extends Compiler {
             // The result can be accessed through the `m`-variable.
             m.forEach((match, groupIndex) => {
                 if (groupIndex === 1) {
-                    keys.push(match);   
+                    keys.push(match);
                 }
             });
         }
-        
+
         return keys;
     }
 
@@ -168,5 +177,5 @@ export default class extends Compiler {
     getNativeFunction (args, body) {
         return new Function(args, body);
     }
-    
+
 }
