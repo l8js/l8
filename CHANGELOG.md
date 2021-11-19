@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.5.4](https://github.com/l8js/l8/compare/v0.5.3...v0.5.4) (2021-11-09)
+
+
+### Features
+
+* add l8.obj() for creating objects based on null object ([144600a](https://github.com/l8js/l8/commit/144600a13d241adbaf0fca7ea1bd32888c7ab598))
+
 ### [0.5.3](https://github.com/l8js/l8/compare/v0.5.2...v0.5.3) (2021-10-14)
 
 
