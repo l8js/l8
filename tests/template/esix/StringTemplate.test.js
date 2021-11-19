@@ -124,3 +124,8 @@ test("render() - exception", () => {
     expect(() => {inst.render({a : 1, b : 2});}).toThrow(/compiled tpl render/);
 });
 
+
+test("hyphen in template", () => {
+    expect(() => make("This is a ${templated-hyphened}")
+        .render({"templated-hyphened": "ignored"})).toThrow(/invalid key-name/);
+});

@@ -32,7 +32,7 @@ import {isString} from "../core/sugar.js";
  * @example
  *
  *    import * as l8 from  "./FileLoader.js";
- * 
+ *
  *    // existing json-file at "./app-cn_mail.conf.json"
  *
  *    const res = await l8.request("./app-cn_mail.conf.json");
@@ -54,7 +54,7 @@ import {isString} from "../core/sugar.js";
  *
  * @param url
  *
- * @return {Promise<void>} false if any exception occures while trying to access the resource,
+ * @return {Promise<boolean>} false if any exception occures while trying to access the resource,
  * indicating that the resource might not exist.
  *
  * @throws if url was not a string
@@ -62,13 +62,12 @@ import {isString} from "../core/sugar.js";
 export async function ping (url) {
 
     let res;
-
     try {
         res = await request(url, {method: "HEAD"});
+        await res.text();
     } catch (e) {
         return false;
     }
-
     return res.status === 200;
 }
 
@@ -134,4 +133,3 @@ export async function request (url, options) {
 
     return res;
 }
-
