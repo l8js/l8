@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.5.5](https://github.com/l8js/l8/compare/v0.5.4...v0.5.5) (2021-11-19)
+
+
+### Bug Fixes
+
+* add make() of esix StringTemplate to exports ([f8e25d4](https://github.com/l8js/l8/commit/f8e25d4e8188efc85e0bcdda1ce8d6cfff227e94)), closes [l8js/l8#25](https://github.com/l8js/l8/issues/25)
+* esix template-variables must not contain hyphens ([a7a165c](https://github.com/l8js/l8/commit/a7a165c6d974a16799d76c02b407dd219fbe578d)), closes [l8js/l8#26](https://github.com/l8js/l8/issues/26)
+* read out response text to prevent "failed to load" ([2a5a0ef](https://github.com/l8js/l8/commit/2a5a0eff16467906b5f342c0e968c83654bf7c92)), closes [l8js/l8#24](https://github.com/l8js/l8/issues/24)
+
 ### [0.5.4](https://github.com/l8js/l8/compare/v0.5.3...v0.5.4) (2021-11-09)
 
 
