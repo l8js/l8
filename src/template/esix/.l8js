@@ -24,5 +24,5 @@
  */
 
 export {default as StringCompiler} from "./StringCompiler.js";
-export {default as StringTemplate} from "./StringTemplate.js";
+export {default as StringTemplate, make} from "./StringTemplate.js";
 export {default as Tpl} from "./Tpl.js";
