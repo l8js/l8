@@ -1,7 +1,7 @@
 /**
  * l8.js
  * l8
- * Copyright (C) 2021 Thorsten Suckow-Homberg https://github.com/l8js/l8
+ * Copyright (C) 2021-2022 Thorsten Suckow-Homberg https://github.com/l8js/l8
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -117,7 +117,7 @@ export async function load (url) {
  *
  * @return {Object} response @see https://developer.mozilla.org/en-US/docs/Web/API/Response
  *
- * @throws if url is not a string; rethrows errors thrown by fetch(). Will also throw if status is >= 500
+ * @throws if url is not a string; rethrows errors thrown by fetch(). Will also throw if status is >= 400
  */
 export async function request (url, options) {
 
@@ -127,7 +127,7 @@ export async function request (url, options) {
 
     let res = await fetch(url, options);
 
-    if (res.status >= 500) {
+    if (res.status >= 400) {
         throw new Error(`Fetching the resource ${url} failed with ${res.status} ${res.statusText}`);
     }
 

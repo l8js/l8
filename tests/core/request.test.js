@@ -1,7 +1,7 @@
 /**
  * l8.js
  * l8
- * Copyright (C) 2021 Thorsten Suckow-Homberg https://github.com/l8js/l8
+ * Copyright (C) 2021-2022 Thorsten Suckow-Homberg https://github.com/l8js/l8
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -80,6 +80,14 @@ test("load() - exception for 500", async () => {
 
     expect.assertions(1);
     await expect(load("https://500")).rejects.toThrow(/fetching the resource/i);
+});
+
+
+test("load() - exception for 400 (@l8js/l8#31)", async () => {
+    fetch.mockResponseOnce("Server Error", {status : 400, statusText : "Error"});
+
+    expect.assertions(1);
+    await expect(load("https://400")).rejects.toThrow(/fetching the resource/i);
 });
 
 
