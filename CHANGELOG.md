@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.5.6](https://github.com/l8js/l8/compare/v0.5.5...v0.5.6) (2022-04-22)
+
+
+### Bug Fixes
+
+* l8.load does not throw error if resource was not found ([49bf801](https://github.com/l8js/l8/commit/49bf8011bf17b498bd697ec9e03a5fec8b44a5ee)), closes [l8js/l8#31](https://github.com/l8js/l8/issues/31)
+
 ### [0.5.5](https://github.com/l8js/l8/compare/v0.5.4...v0.5.5) (2021-11-19)
 
 
