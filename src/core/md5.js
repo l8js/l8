@@ -1,7 +1,7 @@
 /**
  * l8.js
  * l8
- * Copyright (C) 2021-2022 Thorsten Suckow-Homberg https://github.com/l8js/l8
+ * Copyright (C) 2022 Thorsten Suckow-Homberg https://github.com/l8js/l8
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -23,14 +23,13 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import {liquify} from "./liquify.js";
-export * from "./sugar.js";
-export * from "./array.js";
-export * from "./object.js";
-export * from "./string.js";
-export * from "./request.js";
-export * from "./md5.js";
+import {default as cryptoMD5} from "crypto-js/md5";
 
-export {
-    liquify
-};
+/**
+ * Uses crpyto-js/md5 for computing the hash.
+ *
+ * @param {String} str
+ *
+ * @returns {String} md5-representation of the input-string.
+ */
+export const md5 = str => cryptoMD5(str).toString();

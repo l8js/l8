@@ -1,6 +1,6 @@
 # @l8js/l8 ![MIT](https://img.shields.io/npm/l/@l8js/l8) [![npm version](https://badge.fury.io/js/@l8js%2Fl8.svg)](https://npmjs.org/@l8js/l8)  ![build](https://github.com/l8js/l8/actions/workflows/run.tests.yml/badge.svg) 
 
-#### l8js (_Read: light js_)
+#### l8.js (_Read: light js_)
 
 [Site](https://github.com/l8js/l8) |
 [Twitter](https://twitter.com/ThorstenSuckow)
@@ -10,8 +10,8 @@ Lightweight JavaScript library.
 
 **l8js** is released under the [MIT license](https://github.com/l8js/l8/blob/main/LICENSE.txt) & supports modern environments.
 
-## Why l8js?
-[l8js](https://github.com/l8js/l8) provides functionality, wrappers and thin(!) abstraction layers to ease the process of accessing and
+## Why l8.js?
+[l8.js](https://github.com/l8js/l8) provides functionality, wrappers and thin(!) abstraction layers to ease the process of accessing and
 manipulating data in JavaScript. It also provides syntactical sugar for convenient access to language specific functions.
 
 
@@ -87,6 +87,8 @@ manipulating data in JavaScript. It also provides syntactical sugar for convenie
     console.log(tpl.render({templated : "parsed", that : {supports : "that supports"}}));
     // This is a parsed string that supports JavaScript TemplateStrings
 
+    // l8.md5() - create MD5-Hash from String
+    let hashed = md5("demo@conjoon.org")
     
     // ... and many more
 ```
@@ -110,7 +112,7 @@ npm's `postinstall` will take care of generating builds in `./dist/`. API docs a
 
 ### Module Formats
 #### Default JS Module export
-Provides default JS-Module export for the whole [l8js-library](https://github.com/l8js/l8).
+Provides default JS-Module export for the whole [l8.js-library](https://github.com/l8js/l8).
 
 ```javascript
 import l8 from "./dist/l8.runtime.esm.js";
@@ -118,7 +120,7 @@ import l8 from "./dist/l8.runtime.esm.js";
 
 
 #### Named JS module exports
-Provides named JS-Module exports for the main-packages of [l8js-library](https://github.com/l8js/l8).
+Provides named JS-Module exports for the main-packages of [l8.js-library](https://github.com/l8js/l8).
 
 ```javascript
 import {core, template, text} from "./dist/l8.packages.esm.js";
@@ -126,8 +128,11 @@ import {core, template, text} from "./dist/l8.packages.esm.js";
 
 
 #### Universal Module Definition (UMD)
-Provides a Universal Module Definition for the whole [l8js-library](https://github.com/l8js/l8).
+Provides a Universal Module Definition for the whole [l8.js-library](https://github.com/l8js/l8).
 
 ```html
 <script type="text/javascript" src="./dist/l8.runtime.umd.js" />
 ```
+
+## 3rd-party Acknowledgements
+**l8.js** uses [crypto-js](https://www.npmjs.com/package/crypto-js) for `l8.md5()`. 

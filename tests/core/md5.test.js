@@ -1,7 +1,7 @@
 /**
  * l8.js
  * l8
- * Copyright (C) 2021-2022 Thorsten Suckow-Homberg https://github.com/l8js/l8
+ * Copyright (C) 2022 Thorsten Suckow-Homberg https://github.com/l8js/l8
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -23,14 +23,10 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import {liquify} from "./liquify.js";
-export * from "./sugar.js";
-export * from "./array.js";
-export * from "./object.js";
-export * from "./string.js";
-export * from "./request.js";
-export * from "./md5.js";
+import * as l8 from "../../src/core/md5.js";
 
-export {
-    liquify
-};
+test("l8.md5", async () => {
+
+    expect(l8.md5("ts@siteartwork.de")).toBe("2e4359b3a37d7e59260e0d7341ffa6ac");
+
+});
