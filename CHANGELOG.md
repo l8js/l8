@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.6.0](https://github.com/l8js/l8/compare/v0.5.6...v0.6.0) (2022-05-05)
+
+
+### Features
+
+* add l8.md5() ([5a51b3f](https://github.com/l8js/l8/commit/5a51b3f5f328f555ddceacc0c11e9ee1bb2d5d5c))
+
 ### [0.5.6](https://github.com/l8js/l8/compare/v0.5.5...v0.5.6) (2022-04-22)
 
 
