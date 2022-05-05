@@ -37,6 +37,8 @@
     "@babel/preset-env": "^7.14.4",
     "@commitlint/cli": "^13.2.0",
     "@commitlint/config-conventional": "^13.2.0",
+    "@rollup/plugin-commonjs": "^22.0.0",
+    "@rollup/plugin-node-resolve": "^13.3.0",
     "babel-jest": "^27.0.1",
     "babel-plugin-rewire": "^1.2.0",
     "eslint": "^7.27.0",
@@ -46,5 +48,8 @@
     "node-git-hooks": "^1.0.6",
     "rollup": "^2.57.0",
     "standard-version": "^9.3.1"
+  },
+  "dependencies": {
+    "crypto-js": "^4.1.1"
   }
 }
