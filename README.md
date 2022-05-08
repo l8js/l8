@@ -82,13 +82,13 @@ manipulating data in JavaScript. It also provides syntactical sugar for convenie
     console.log(html); // This is an url <a href="https://www.conjoon.org">https://www.conjoon.org</a> and it is not clickable
 
     
-    // l8.template.esix.StringTemplate - Template Engine supporting ES6 String Templates.
-    let tpl = l8.template.esix.StringTemplate.make("This is a ${templated} string ${that.supports} JavaScript TemplateStrings");
+    // l8.template.esix.StringTemplate - Template Engine supporting ES6 Templates-Strings.
+    let tpl = l8.template.esix.make("This is a ${templated} string ${that.supports} JavaScript TemplateStrings");
     console.log(tpl.render({templated : "parsed", that : {supports : "that supports"}}));
     // This is a parsed string that supports JavaScript TemplateStrings
 
     // l8.md5() - create MD5-Hash from String
-    let hashed = md5("demo@conjoon.org")
+    let hashed = l8.md5("demo@conjoon.org")
     
     // ... and many more
 ```
