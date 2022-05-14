@@ -40,7 +40,7 @@ export default [{
         name : "default",
         plugins: [terser()]
     }],
-    external: ["crypto-js/md5"]
+    external: ["crypto-js/md5.js"]
 }, {
     input: "./src/.l8js",
     output : [{
@@ -54,7 +54,7 @@ export default [{
         name : "default",
         plugins: [terser()]
     }],
-    external: ["crypto-js/md5"]
+    external: ["crypto-js/md5.js"]
 }, {
     input: "./src/l8.js",
     output : [{

@@ -23,7 +23,7 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import {default as cryptoMD5} from "crypto-js/md5";
+import {default as cryptoMD5} from "crypto-js/md5.js";
 
 /**
  * Uses crpyto-js/md5 for computing the hash.

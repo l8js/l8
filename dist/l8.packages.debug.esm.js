@@ -1,4 +1,4 @@
-import cryptoMD5 from 'crypto-js/md5';
+import cryptoMD5 from 'crypto-js/md5.js';
 
 /**
  * l8.js
