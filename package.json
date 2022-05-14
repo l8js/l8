@@ -23,14 +23,13 @@
   "scripts": {
     "build": "npx rollup -c",
     "build:docs": "npx jsdoc ./src/ -r -d docs",
-    "postinstall": "npm run build && npm run build:docs",
     "test": "jest",
     "prepare": "npx node-git-hooks",
     "postversion": "git push && git push --tags",
-    "release": "standard-version",
-    "release:patch": "standard-version --release-as patch && npm run postversion",
-    "release:minor": "standard-version --release-as minor && npm run postversion",
-    "release:major": "standard-version --release-as major && npm run postversion"
+    "preversion": "npm run test && npm run build && npm run build:docs",
+    "release:patch": "preversion && standard-version --release-as patch && npm run postversion",
+    "release:minor": "preversion && standard-version --release-as minor && npm run postversion",
+    "release:major": "preversion && standard-version --release-as major && npm run postversion"
   },
   "devDependencies": {
     "@babel/core": "^7.14.3",
