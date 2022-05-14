@@ -26,10 +26,13 @@
     "build:dev": "npm i --save-dev && npx node-git-hooks",
     "test": "jest",
     "postversion": "git push && git push --tags",
-    "preversion": "npm run test && npm run build && npm run build:docs",
+    "preversion": "npm run test && npm run build",
     "release:patch": "npm run preversion && standard-version --release-as patch && npm run postversion",
     "release:minor": "npm run preversion && standard-version --release-as minor && npm run postversion",
     "release:major": "npm run preversion && standard-version --release-as major && npm run postversion"
+  },
+  "dependencies": {
+    "crypto-js": "^4.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.14.3",
@@ -40,11 +43,10 @@
     "@rollup/plugin-node-resolve": "^13.3.0",
     "babel-jest": "^27.0.1",
     "babel-plugin-rewire": "^1.2.0",
-    "crypto-js": "^4.1.1",
     "eslint": "^7.27.0",
     "jest": "^27.0.1",
     "jest-fetch-mock": "^3.0.3",
-    "jsdoc": "^3.6.7",
+    "jsdoc": "^3.6.10",
     "node-git-hooks": "^1.0.6",
     "rollup": "^2.73.0",
     "rollup-plugin-terser": "^7.0.2",
