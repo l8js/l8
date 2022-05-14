@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.7.2](https://github.com/l8js/l8/compare/v0.7.1...v0.7.2) (2022-05-14)
+
+
+### Bug Fixes
+
+* add file extension for crypot-js/md5 in import ([9412ed6](https://github.com/l8js/l8/commit/9412ed6102e24176766204460f3c36288b02694f))
+
 ### [0.7.1](https://github.com/l8js/l8/compare/v0.7.0...v0.7.1) (2022-05-14)
 
 
