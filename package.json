@@ -1,6 +1,6 @@
 {
   "name": "@l8js/l8",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "description": "Lightweight core library for JavaScript projects",
   "main": "dist/l8.runtime.esm.js",
   "type": "module",
@@ -27,9 +27,9 @@
     "test": "jest",
     "postversion": "git push && git push --tags",
     "preversion": "npm run test && npm run build && npm run build:docs",
-    "release:patch": "preversion && standard-version --release-as patch && npm run postversion",
-    "release:minor": "preversion && standard-version --release-as minor && npm run postversion",
-    "release:major": "preversion && standard-version --release-as major && npm run postversion"
+    "release:patch": "npm run preversion && standard-version --release-as patch && npm run postversion",
+    "release:minor": "npm run preversion && standard-version --release-as minor && npm run postversion",
+    "release:major": "npm run preversion && standard-version --release-as major && npm run postversion"
   },
   "devDependencies": {
     "@babel/core": "^7.14.3",
