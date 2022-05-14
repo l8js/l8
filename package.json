@@ -23,8 +23,8 @@
   "scripts": {
     "build": "npx rollup -c",
     "build:docs": "npx jsdoc ./src/ -r -d docs",
+    "build:dev": "npm i --save-dev && npx node-git-hooks",
     "test": "jest",
-    "prepare": "npx node-git-hooks",
     "postversion": "git push && git push --tags",
     "preversion": "npm run test && npm run build && npm run build:docs",
     "release:patch": "preversion && standard-version --release-as patch && npm run postversion",

@@ -98,17 +98,21 @@ manipulating data in JavaScript. It also provides syntactical sugar for convenie
 
 Using npm:
 ```shell
-$ npm i --save-dev @l8js/l8
+$ npm i @l8js/l8
 ```
 
-Use
+#### Running Tests and using Build Scripts
 ```shell
 $ npm run build:dev
 ```
-for creating the dev environment.
+for installing dev-dependencies. This allows for running tests and build-scripts. The script will also
+install necessary git hooks.
 
 ## Usage
-npm's `postinstall` will take care of generating builds in `./dist/`. API docs are generated in `./docs`.
+Builds can be found in `./dist/`. API docs are available in `./docs`.
+<br>
+**Note:** Minimized and none-minimized builds are available. None-minimized can be identified by
+".debug." in their file-name (e.g. `sourcefile.debug.js`  vs `sourcefile.js`).
 
 ### Module Formats
 #### Default JS Module export
