@@ -23,34 +23,50 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import { nodeResolve } from '@rollup/plugin-node-resolve';
-import commonjs from '@rollup/plugin-commonjs';
+import { nodeResolve } from "@rollup/plugin-node-resolve";
+import commonjs from "@rollup/plugin-commonjs";
+import { terser } from "rollup-plugin-terser";
 
 export default [{
-    input: './src/l8.js',
+    input: "./src/l8.js",
     output : [{
-        file :'./dist/l8.runtime.esm.js',
-        format: 'esm',
+        file :"./dist/l8.runtime.debug.esm.js",
+        format: "esm",
         sourcemap: true,
         name : "default"
+    }, {
+        file :"./dist/l8.runtime.esm.js",
+        format: "esm",
+        name : "default",
+        plugins: [terser()]
     }],
     external: ["crypto-js/md5"]
 }, {
-    input: './src/.l8js',
+    input: "./src/.l8js",
     output : [{
-        file :'./dist/l8.packages.esm.js',
-        format: 'esm',
+        file :"./dist/l8.packages.debug.esm.js",
+        format: "esm",
         sourcemap: true,
         name : "default"
+    }, {
+        file :"./dist/l8.packages.esm.js",
+        format: "esm",
+        name : "default",
+        plugins: [terser()]
     }],
     external: ["crypto-js/md5"]
 }, {
-    input: './src/l8.js',
+    input: "./src/l8.js",
     output : [{
-        file :'./dist/l8.runtime.umd.js',
-        format: 'umd',
+        file :"./dist/l8.runtime.debug.umd.js",
+        format: "umd",
         sourcemap: true,
         name : "l8"
+    }, {
+        file :"./dist/l8.runtime.umd.js",
+        format: "umd",
+        name : "l8",
+        plugins: [terser()]
     }],
     plugins: [nodeResolve(), commonjs()]
 }];
