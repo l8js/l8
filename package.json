@@ -23,14 +23,13 @@
   "scripts": {
     "build": "npx rollup -c",
     "build:docs": "npx jsdoc ./src/ -r -d docs",
-    "postinstall": "npm run build && npm run build:docs",
+    "build:dev": "npm i --save-dev && npx node-git-hooks",
     "test": "jest",
-    "prepare": "npx node-git-hooks",
     "postversion": "git push && git push --tags",
-    "release": "standard-version",
-    "release:patch": "standard-version --release-as patch && npm run postversion",
-    "release:minor": "standard-version --release-as minor && npm run postversion",
-    "release:major": "standard-version --release-as major && npm run postversion"
+    "preversion": "npm run test && npm run build && npm run build:docs",
+    "release:patch": "preversion && standard-version --release-as patch && npm run postversion",
+    "release:minor": "preversion && standard-version --release-as minor && npm run postversion",
+    "release:major": "preversion && standard-version --release-as major && npm run postversion"
   },
   "devDependencies": {
     "@babel/core": "^7.14.3",
@@ -41,15 +40,14 @@
     "@rollup/plugin-node-resolve": "^13.3.0",
     "babel-jest": "^27.0.1",
     "babel-plugin-rewire": "^1.2.0",
+    "crypto-js": "^4.1.1",
     "eslint": "^7.27.0",
     "jest": "^27.0.1",
     "jest-fetch-mock": "^3.0.3",
     "jsdoc": "^3.6.7",
     "node-git-hooks": "^1.0.6",
-    "rollup": "^2.57.0",
+    "rollup": "^2.73.0",
+    "rollup-plugin-terser": "^7.0.2",
     "standard-version": "^9.3.1"
-  },
-  "dependencies": {
-    "crypto-js": "^4.1.1"
   }
 }
