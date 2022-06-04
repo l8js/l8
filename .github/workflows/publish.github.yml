@@ -20,6 +20,7 @@ jobs:
           registry-url: 'https://npm.pkg.github.com'
           scope: '@l8js'
       - run: |
+          npm ci --save-dev
           npm run build
           npm publish --access public
         env:
