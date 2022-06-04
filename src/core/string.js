@@ -1,7 +1,7 @@
 /**
  * l8.js
  * l8
- * Copyright (C) 2021 Thorsten Suckow-Homberg https://github.com/l8js/l8
+ * Copyright (C) 2021-2022 Thorsten Suckow-Homberg https://github.com/l8js/l8
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -117,10 +117,10 @@ export const unify = function (target, token, ignore) {
         ignore = [].concat(ignore);
         ignore = ignore.map((val) => escapeRegExp(val));
         ignore.map((val) => {
-            let sanitizer = new RegExp(`(${escapeRegExp(val) + "*"})`, "gim");
+            let sanitizer = new RegExp(`(${escapeRegExp(val)})`, "gim");
+
             target = target.replace(sanitizer, val);
         });
-
 
         ignore = new RegExp(`(${ignore.join("|")})`, "gim");
         let rem = "",

@@ -1,7 +1,7 @@
 /**
  * l8.js
  * l8
- * Copyright (C) 2021 Thorsten Suckow-Homberg https://github.com/l8js/l8
+ * Copyright (C) 2021-2022 Thorsten Suckow-Homberg https://github.com/l8js/l8
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -61,12 +61,12 @@ test("unify()", () => {
 
     expect(l8.unify("https://foo//bar////file/u", "/", ["https://"])).toBe("https://foo/bar/file/u");
     expect(l8.unify("https://foo//bar////file/u", "/", "://")).toBe("https://foo/bar/file/u");
-    expect(l8.unify("https://foo//://////bar////file/u", "/", ["://", "://"])).toBe("https://foo/://bar/file/u");
-    expect(l8.unify("ht:://tps://foo//://////bar////file/u", "/", ["://", ":://"])).toBe("ht:://tps://foo/://bar/file/u");
+    expect(l8.unify("https://foo//://////bar////file/u", "/", ["://", "://"])).toBe("https://foo/:///bar/file/u");
+    expect(l8.unify("ht:://tps://foo//://////bar////file/u", "/", ["://", ":://"])).toBe("ht:://tps://foo/:///bar/file/u");
 
     expect(l8.unify("https://LJlkhj/kjhkjhgb///", "/", "://")).toBe("https://LJlkhj/kjhkjhgb/");
 
-    expect(l8.unify("host:///endpoint//", "/", "://")).toBe("host://endpoint/");
+    expect(l8.unify("host:///endpoint//", "/", "://")).toBe("host:///endpoint/");
     expect(l8.unify("cn_mail", "/", "://")).toBe("cn_mail");
 
     expect(l8.unify("cn_m///ail", "/", "://")).toBe("cn_m/ail");
@@ -74,6 +74,10 @@ test("unify()", () => {
     expect(l8.unify("https://php-ms-imapuser.ddev.site/rest-imapuser/api/v0.1", "/", "://")).toBe(
         "https://php-ms-imapuser.ddev.site/rest-imapuser/api/v0.1");
 
+    expect (l8.unify("123//", "/", "//A")).toBe("123/");
+    expect (l8.unify("123//", "/", "//ABC")).toBe("123/");
+    expect (l8.unify("123//", "/", "//:")).toBe("123/");
+    expect(l8.unify("12///A34//", "/", "//A")).toBe("12///A34/");
 });
 
 
