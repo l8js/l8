@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.8.0](https://github.com/l8js/l8/compare/v0.7.4...v0.8.0) (2022-12-12)
+
+
+### Features
+
+* allow for specific separator in l8.unchain ([4ace40c](https://github.com/l8js/l8/commit/4ace40c252c2a21f341df4f4b05dc63cc116cedd))
+
 ### [0.7.4](https://github.com/l8js/l8/compare/v0.7.3...v0.7.4) (2022-06-04)
 
 ### [0.7.3](https://github.com/l8js/l8/compare/v0.7.2...v0.7.3) (2022-06-04)
