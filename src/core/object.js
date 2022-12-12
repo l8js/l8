@@ -268,14 +268,16 @@ export const purge = function (input, match= undefined) {
 
 
 /**
- * Splits the specified string by looking for "." as separators and returns
+ * Splits the specified string by looking for "separator" as separators and returns
  * undefined if the evaluated property is not available, otherwise the value
  * of the property.
  *
  *      @example
  *      var foo = { 1 : { 2 : { 3 : { 4 : 'bar'}}}};
- *
  *      l8.unchain('1.2.3.4', foo); // 'bar'
+ *
+ *      var foo = { "1.2" : { 2 : { 3 : { 4 : 'bar'}}}};
+ *      l8.unchain("1.2/3/4", foo, undefined, "/"); // 'bar'
  *
  * @param {String} chain The object chain to resolve
  * @param {Object} scope The scope where the chain should be looked up
@@ -285,15 +287,16 @@ export const purge = function (input, match= undefined) {
  * @example
  * const cb = value => value.toUpperCase(),
  *      foo = { 1 : { 2 : { 3 : { 4 : 'bar'}}}};
- *
  *  l8.unchain('1.2.3.4', foo, cb); // 'BAR'
+ * @param {String} separator Separator used for splitting the chain, defaults to "."
+ *
  *
  * @return {*} undefined if either scope was not found or the chain could
  * not be resolved, otherwise the value found in [scope][chain]
  */
-export const unchain = function (chain, scope, defaultValue = undefined) {
+export const unchain = function (chain, scope, defaultValue = undefined, separator = ".") {
 
-    var parts = chain.split("."),
+    var parts = chain.split(separator),
         obj   = scope;
 
     while (obj !== undefined && parts.length) {

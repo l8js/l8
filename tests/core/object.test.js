@@ -124,6 +124,8 @@ test("unchain()", () => {
 
     expect(l8.unchain("1.2.3.4.5", testMe, (value) => value.toUpperCase())).toBe("FOO");
 
+    const paths = {1:{"2.1":{3:{"4.2":{5:"foo"}}}}};
+    expect(l8.unchain("1/2.1/3/4.2/5", paths, undefined, "/")).toBe("foo");
 
 });
 
