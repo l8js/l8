@@ -33,10 +33,11 @@
  * "name", "name (1)", "name (2)", and returns a new name with the number of prefixes found as
  * the new ordinal for newName, otherwise it returns just newName.
  *
- * @param {Array} list
  * @param {String}newName
+ * @param {Array} list
+ *
  */
-function nameToOrdinal (list, newName) {
+function nameToOrdinal ( newName, list) {
 
     const regex = new RegExp(`^(${newName})?\\s\\((\\d)\\)$`, "gmi");
 
@@ -48,7 +49,7 @@ function nameToOrdinal (list, newName) {
             max++;
         }
 
-        while ((m = regex.exec(entry)) !== null) {
+        if ((m = regex.exec(entry)) !== null) {
             max = Math.max(max, parseInt(m[2] ?? 0));
         }
 

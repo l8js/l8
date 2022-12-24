@@ -25,27 +25,33 @@
 
 import {nameToOrdinal} from "../../src/text/Namer.js";
 
-test("countName", () =>{
+test("nameToOrdinal", () =>{
 
     const name = "name";
 
     let list = [];
 
     // empty list
-    expect(nameToOrdinal(list, name)).toBe(name);
+    expect(nameToOrdinal(name, list)).toBe(name);
 
     // no entry matching
     list = ["foo", "bar"];
-    expect(nameToOrdinal(list, name)).toBe(name);
+    expect(nameToOrdinal(name, list)).toBe(name);
 
     // one entry matching
     list = ["name", "foo"];
-    expect(nameToOrdinal(list, name)).toBe("name (1)");
+    expect(nameToOrdinal(name, list)).toBe("name (1)");
 
     // three entries matching, random order
     list = ["name", "name (2)", "name (1)", "foo"];
-    expect(nameToOrdinal(list, name)).toBe("name (3)");
+    expect(nameToOrdinal(name, list)).toBe("name (3)");
 
+
+    list = ["some name (1)", "foo"];
+    expect(nameToOrdinal(name, list)).toBe("name");
+
+    list = ["AOL", "Google Mail (1)"];
+    expect(nameToOrdinal("freenet", list)).toBe("freenet");
 
 });
 
