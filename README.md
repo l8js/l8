@@ -90,6 +90,9 @@ manipulating data in JavaScript. It also provides syntactical sugar for convenie
     // l8.md5() - create MD5-Hash from String
     let hashed = l8.md5("demo@conjoon.org")
     
+    let name = l8.text.nameToOrdinal("New Folder", ["New Folder (1)", "users", "randomName"]);
+    console.log(name); // "New Folder (2)"
+    
     // ... and many more
 ```
 
