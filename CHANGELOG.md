@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.9.0](https://github.com/l8js/l8/compare/v0.8.0...v0.9.0) (2022-12-24)
+
+
+### Features
+
+* add nameToOrdinal() for computing name w/ ordinal ([9651ed7](https://github.com/l8js/l8/commit/9651ed79d470c897cc03b54c98544efe837937e1))
+
 ## [0.8.0](https://github.com/l8js/l8/compare/v0.7.4...v0.8.0) (2022-12-12)
 
 
