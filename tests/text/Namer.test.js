@@ -1,7 +1,7 @@
 /**
  * l8.js
  * l8
- * Copyright (C) 2021 Thorsten Suckow-Homberg https://github.com/l8js/l8
+ * Copyright (C) 2022 Thorsten Suckow-Homberg https://github.com/l8js/l8
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -23,8 +23,29 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-export {default as toBlockquote} from "./toBlockquote.js";
-export {default as toEmailLink} from "./toEmailLink.js";
-export {default as toHyperlink} from "./toHyperlink.js";
-export {default as toLineBreak} from "./toLineBreak.js";
-export {nameToOrdinal} from "./Namer.js";
+import {nameToOrdinal} from "../../src/text/Namer.js";
+
+test("countName", () =>{
+
+    const name = "name";
+
+    let list = [];
+
+    // empty list
+    expect(nameToOrdinal(list, name)).toBe(name);
+
+    // no entry matching
+    list = ["foo", "bar"];
+    expect(nameToOrdinal(list, name)).toBe(name);
+
+    // one entry matching
+    list = ["name", "foo"];
+    expect(nameToOrdinal(list, name)).toBe("name (1)");
+
+    // three entries matching, random order
+    list = ["name", "name (2)", "name (1)", "foo"];
+    expect(nameToOrdinal(list, name)).toBe("name (3)");
+
+
+});
+

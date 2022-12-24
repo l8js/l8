@@ -1,7 +1,7 @@
 /**
  * l8.js
  * l8
- * Copyright (C) 2021 Thorsten Suckow-Homberg https://github.com/l8js/l8
+ * Copyright (C) 2022 Thorsten Suckow-Homberg https://github.com/l8js/l8
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -23,8 +23,39 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-export {default as toBlockquote} from "./toBlockquote.js";
-export {default as toEmailLink} from "./toEmailLink.js";
-export {default as toHyperlink} from "./toHyperlink.js";
-export {default as toLineBreak} from "./toLineBreak.js";
-export {nameToOrdinal} from "./Namer.js";
+/**
+ * @module l8/text/Namer
+ */
+
+
+/**
+ * Looks up the newName in list and tries to find similiar strings in the form of
+ * "name", "name (1)", "name (2)", and returns a new name with the number of prefixes found as
+ * the new ordinal for newName, otherwise it returns just newName.
+ *
+ * @param {Array} list
+ * @param {String}newName
+ */
+function nameToOrdinal (list, newName) {
+
+    const regex = new RegExp(`^(${newName})?\\s\\((\\d)\\)$`, "gmi");
+
+    let m, max = -1;
+
+    list.forEach(entry => {
+
+        if (entry === newName) {
+            max++;
+        }
+
+        while ((m = regex.exec(entry)) !== null) {
+            max = Math.max(max, parseInt(m[2] ?? 0));
+        }
+
+    });
+
+
+    return max === -1 ? newName : `${newName} (${++max})`;
+}
+
+export {nameToOrdinal};
