@@ -176,8 +176,8 @@ export const isNot = function (target) {
 /**
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions#escaping
  */
-function escapeRegExp (string) {
+export const escapeRegExp = function (string) {
     return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-}
+};
 
 

@@ -27,19 +27,33 @@
  * @module l8/text/Namer
  */
 
+import {escapeRegExp} from "../core/string.js";
 
 /**
  * Looks up the newName in list and tries to find similiar strings in the form of
  * "name", "name (1)", "name (2)", and returns a new name with the number of prefixes found as
  * the new ordinal for newName, otherwise it returns just newName.
+ * Ordinals are detected and appended to the string with the postfix parameter, whereas
+ * \d is the placeholder ofr the number.
+ *
+ *  @example
+ *       l8.nameToOrdinal("NewKey", ["NewKey"])
+ *       // produces "NewKey (1)"
+ *       l8.nameToOrdinal("NewKey", ["NewKey"], "_\d")
+ *       // produces "NewKey_1"
  *
  * @param {String}newName
  * @param {Array} list
+ * @param {String=" (\\d)"} postfix
  *
  */
-function nameToOrdinal ( newName, list) {
+function nameToOrdinal ( newName, list, postfix = " (\\d)") {
 
-    const regex = new RegExp(`^(${newName})?\\s\\((\\d)\\)$`, "gmi");
+    const orgPostfix = postfix;
+    postfix = escapeRegExp(postfix);
+    postfix = postfix.replace("\\\\d", "(\\d)");
+
+    const regex = new RegExp(`^(${newName})?${postfix}$`, "gmi");
 
     let m, max = -1;
 
@@ -55,8 +69,10 @@ function nameToOrdinal ( newName, list) {
 
     });
 
+    let val = max === -1 ? max : ++max;
+    let append = orgPostfix.replace("\\d", val);
 
-    return max === -1 ? newName : `${newName} (${++max})`;
+    return val === -1 ? newName : `${newName}${append}`;
 }
 
 export {nameToOrdinal};

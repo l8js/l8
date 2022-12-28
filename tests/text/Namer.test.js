@@ -28,7 +28,6 @@ import {nameToOrdinal} from "../../src/text/Namer.js";
 test("nameToOrdinal", () =>{
 
     const name = "name";
-
     let list = [];
 
     // empty list
@@ -46,12 +45,22 @@ test("nameToOrdinal", () =>{
     list = ["name", "name (2)", "name (1)", "foo"];
     expect(nameToOrdinal(name, list)).toBe("name (3)");
 
-
     list = ["some name (1)", "foo"];
     expect(nameToOrdinal(name, list)).toBe("name");
 
     list = ["AOL", "Google Mail (1)"];
     expect(nameToOrdinal("freenet", list)).toBe("freenet");
+
+    // custom postfix
+    // three entries matching, random order
+    list = ["name", "name_2", "name_1", "foo"];
+    expect(nameToOrdinal(name, list, "_\\d")).toBe("name_3");
+
+    list = ["name", "name...[5]", "name...[1]", "foo"];
+    expect(nameToOrdinal(name, list, "...[\\d]")).toBe("name...[6]");
+
+    list = ["name", "name-3", "name-1", "foo"];
+    expect(nameToOrdinal(name, list, "-\\d")).toBe("name-4");
 
 });
 
