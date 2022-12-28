@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.10.0](https://github.com/l8js/l8/compare/v0.9.0...v0.10.0) (2022-12-28)
+
+
+### Features
+
+* allow for custom postfix with nameToOrdinal() ([bac6029](https://github.com/l8js/l8/commit/bac602904bc37c915c0b7f67559f3cb09ad128dc)), closes [l8js/l8#46](https://github.com/l8js/l8/issues/46)
+
 ## [0.9.0](https://github.com/l8js/l8/compare/v0.8.0...v0.9.0) (2022-12-24)
 
 
