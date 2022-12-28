@@ -53,7 +53,7 @@ function nameToOrdinal ( newName, list, postfix = " (\\d)") {
     postfix = escapeRegExp(postfix);
     postfix = postfix.replace("\\\\d", "(\\d)");
 
-    const regex = new RegExp(`^(${newName})?${postfix}$`, "gmi");
+    const regex = new RegExp(`^(${newName})?${postfix}$`, "mi");
 
     let m, max = -1;
 
