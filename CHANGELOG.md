@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.10.1](https://github.com/l8js/l8/compare/v0.10.0...v0.10.1) (2022-12-28)
+
+
+### Bug Fixes
+
+* namer not updating ordinals properly ([bcdfb80](https://github.com/l8js/l8/commit/bcdfb80ef319641caa27a56e9780e59017ae2a36)), closes [l8js/l8#47](https://github.com/l8js/l8/issues/47)
+
 ## [0.10.0](https://github.com/l8js/l8/compare/v0.9.0...v0.10.0) (2022-12-28)
 
 
