@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.10.2](https://github.com/l8js/l8/compare/v0.10.1...v0.10.2) (2023-02-26)
+
+
+### Bug Fixes
+
+* replacement token in replace() are target of replacement ([15bba4e](https://github.com/l8js/l8/commit/15bba4e2240a390f673313cf3d5eb8e87e10e4b5))
+
 ### [0.10.1](https://github.com/l8js/l8/compare/v0.10.0...v0.10.1) (2022-12-28)
 
 
