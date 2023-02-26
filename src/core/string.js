@@ -1,7 +1,7 @@
 /**
  * l8.js
  * l8
- * Copyright (C) 2021-2022 Thorsten Suckow-Homberg https://github.com/l8js/l8
+ * Copyright (C) 2021-2023 Thorsten Suckow-Homberg https://github.com/l8js/l8
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -58,14 +58,14 @@ import * as l8 from "./sugar.js";
  * @param {(String|Array<String>)} tokens
  * @param {(String|Array<String>)} replace
  * @param {String} target
- *
+ * @param {String} modifier
  * @return {String}
  *
  * @throws {Error} if str was not a string
  *
  * @see escapeRegExp
  */
-export const replace = function (tokens, replace, target) {
+export const replace = function (tokens, replace, target, modifier = "g") {
 
     if (!l8.isString(target)) {
         throw new Error("\"str\" must be a string");
@@ -74,10 +74,26 @@ export const replace = function (tokens, replace, target) {
     tokens  = [].concat(tokens);
     replace = !l8.isString(replace) ? [].concat(replace) : new Array(tokens.length).fill(replace);
 
-    tokens.forEach((item, index) => {
-        target = target.replace(new RegExp(escapeRegExp(item), "g"), replace[index] ?? "");
-    });
+    const group = (token, index) => `(?<i${index}>${escapeRegExp(token)})`;
+    const regExpStr =  `(${tokens.map(group).join("|")})`;
+    const regExp = new RegExp(regExpStr, modifier);
 
+    const matcher = function () {
+        const groups = arguments[arguments.length - 1];
+        let replacement = "";
+
+        Object.keys(groups).some(key => {
+            if (groups[key] !== undefined) {
+                key = parseInt(key.substring(1));
+                replacement = replace[key] === undefined ? "" : replace[key];
+                return true;
+            }
+        });
+
+        return replacement;
+    };
+
+    target = target.replace(regExp, matcher);
 
     return target;
 };

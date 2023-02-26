@@ -1,7 +1,7 @@
 /**
  * l8.js
  * l8
- * Copyright (C) 2021-2022 Thorsten Suckow-Homberg https://github.com/l8js/l8
+ * Copyright (C) 2021-2023 Thorsten Suckow-Homberg https://github.com/l8js/l8
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -31,18 +31,21 @@ test("replace()", () => {
 
     expect(l8.replace(["foo", "bar"], ["oof", "rab"], "this foo is bar")).toBe("this oof is rab");
     expect(l8.replace("foo", "bar",  "this foo is barfoo")).toBe("this bar is barbar");
-    expect(l8.replace(["A", "B"], ["B", "D"], "A")).toBe("D");
+    expect(l8.replace(["A", "B"], ["B", "D"], "A")).toBe("B");
     expect(l8.replace(["A", "C"], "B", "AC")).toBe("BB");
     expect(l8.replace(["A", "C"], ["B"], "AC")).toBe("B");
     expect(l8.replace("A", "B", "A")).toBe("B");
+
+    expect(l8.replace(["A", "B", "A"], "ca", "aAbBa", "gmi")).toBe("cacacacaca");
 
     expect(
         l8.replace(
             ["{node_modules}", "\\"],
             ["F:/npm/@coon-js\\extjs-build/node_modules/", "/"],
-            "npx {node_modules}\\.bin\\sencha")
+            "npx {node_modules}\\.bin\\sencha",
+            "gim")
     ).toBe(
-        "npx F:/npm/@coon-js/extjs-build/node_modules//.bin/sencha"
+        "npx F:/npm/@coon-js\\extjs-build/node_modules//.bin/sencha"
     );
 
 
