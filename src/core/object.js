@@ -284,7 +284,7 @@ export const purge = function (input, match= undefined) {
  *      var foo = { "1.2" : { 2 : { 3 : { 4 : 'bar'}}}};
  *      l8.unchain("1.2/3/4", foo, undefined, "/"); // 'bar'
  *
- * @param {String} chain The object chain to resolve
+ * @param {String|Array} chain The object chain to resolve as a string, or an array chain nodes representing the chain
  * @param {Object} scope The scope where the chain should be looked up
  * @param {(*|Function)} defaultValue a defaultValue to return in case the chain is not existing.
  * if this argument is a function, the function gets called. If the chain existed, it will be called with the
@@ -301,7 +301,7 @@ export const purge = function (input, match= undefined) {
  */
 export const unchain = function (chain, scope, defaultValue = undefined, separator = ".") {
 
-    var parts = chain.split(separator),
+    var parts = l8.isArray(chain) ? chain: chain.split(separator),
         obj   = scope;
 
     while (obj !== undefined && parts.length) {

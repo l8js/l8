@@ -113,14 +113,18 @@ test("unchain()", () => {
 
     const testMe = {1:{2:{3:{4:{5:"foo"}}}}};
 
+
     expect(l8.unchain("1.2.3.4.5", testMe)).toBe("foo");
+    expect(l8.unchain("1.2.3.4.5".split("."), testMe)).toBe("foo");
     expect(l8.unchain("1.2.9.4.5", testMe)).toBeUndefined();
+    expect(l8.unchain("1.2.9.4.5".split("."), testMe)).toBeUndefined();
 
     expect(l8.unchain("1.2.3.4.5")).toBeUndefined();
 
     expect(l8.unchain("1.2.3.4.5", testMe, "end")).toBe("foo");
     expect(l8.unchain("1.2.8.4.5", testMe, "defaultValue")).toBe("defaultValue");
     expect(l8.unchain("1.2.3.4.6", testMe, "defaultValue")).toBe("defaultValue");
+    expect(l8.unchain("1.2.3.4.6".split("."), testMe, "defaultValue")).toBe("defaultValue");
 
     expect(l8.unchain("1.2.3.4.5", testMe, (value) => value.toUpperCase())).toBe("FOO");
 
