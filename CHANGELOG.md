@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.12.0](https://github.com/l8js/l8/compare/v0.11.0...v0.12.0) (2023-03-08)
+
+
+### Features
+
+* unchain() digests array of chain nodes for unchaining target object ([1f5ce40](https://github.com/l8js/l8/commit/1f5ce4094af2f9a91d20ac8e64d492f5c9b40d5e))
+
 ## [0.11.0](https://github.com/l8js/l8/compare/v0.10.2...v0.11.0) (2023-03-08)
 
 
