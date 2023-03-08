@@ -211,12 +211,10 @@ export const chain = function (chains, target = {}, defaultValue = undefined, ov
          * @todo O(n) ?
          */
         const
-            keys = l8.isArray(str) ? str : str.split("."),
+            keys = l8.isArray(str) ? [].concat(str) : str.split("."),
             cr = (obj, keys) => {
 
-                let key;
-
-                key = keys.shift();
+                let key = keys.shift();
 
                 if (!obj[key] || (override === true && !keys.length)) {
                     obj[key] = keys.length ? {} : (l8.isFunction(defaultValue) ? defaultValue(str) : defaultValue) ;
@@ -301,7 +299,8 @@ export const purge = function (input, match= undefined) {
  */
 export const unchain = function (chain, scope, defaultValue = undefined, separator = ".") {
 
-    var parts = l8.isArray(chain) ? chain: chain.split(separator),
+    // concat array to new array to not process the same reference.
+    var parts = l8.isArray(chain) ? [].concat(chain): chain.split(separator),
         obj   = scope;
 
     while (obj !== undefined && parts.length) {

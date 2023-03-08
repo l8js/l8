@@ -115,7 +115,12 @@ test("unchain()", () => {
 
 
     expect(l8.unchain("1.2.3.4.5", testMe)).toBe("foo");
-    expect(l8.unchain("1.2.3.4.5".split("."), testMe)).toBe("foo");
+
+    // do not shift() on reference
+    let ref = "1.2.3.4.5".split(".");
+    expect(l8.unchain(ref, testMe)).toBe("foo");
+    expect(ref).toEqual("1.2.3.4.5".split("."));
+
     expect(l8.unchain("1.2.9.4.5", testMe)).toBeUndefined();
     expect(l8.unchain("1.2.9.4.5".split("."), testMe)).toBeUndefined();
 
@@ -220,6 +225,10 @@ test("chain()", () => {
     l8.chain([["a", "b.c", "d"], "m.k.d"], obj, "foo");
     expect(obj.a["b.c"].d).toBe("foo");
     expect(obj.m.k.d).toBe("foo");
+
+    const ref = ["a", "b.c", "d"];
+    l8.chain([ref], obj, "foo");
+    expect(ref).toEqual(["a", "b.c", "d"]);
 
 });
 
