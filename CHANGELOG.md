@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.11.0](https://github.com/l8js/l8/compare/v0.10.2...v0.11.0) (2023-03-08)
+
+
+### Features
+
+* chain() digests array of array for building target chains ([0e7df1e](https://github.com/l8js/l8/commit/0e7df1edea1934f511d8d0c3acee00cb0bb87fb1))
+
 ### [0.10.2](https://github.com/l8js/l8/compare/v0.10.1...v0.10.2) (2023-02-26)
 
 
