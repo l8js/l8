@@ -203,6 +203,20 @@ test("chain()", () => {
     expect(obj.foo.bar.snafu).toBe("m");
     expect(obj.foo.bar.barfoo).toBe("m");
 
+    ctrl = "foo/bar.snafu/bar".split("/");
+    obj = {};
+    l8.chain([ctrl], obj, "m");
+    expect(obj.foo["bar.snafu"].bar).toBe("m");
+
+    obj = {};
+    l8.chain([["a", "b.c", "d"]], obj, "foo");
+    expect(obj.a["b.c"].d).toBe("foo");
+
+    obj = {};
+    l8.chain([["a", "b.c", "d"], "m.k.d"], obj, "foo");
+    expect(obj.a["b.c"].d).toBe("foo");
+    expect(obj.m.k.d).toBe("foo");
+
 });
 
 

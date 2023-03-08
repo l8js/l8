@@ -177,6 +177,12 @@ export const visit = function (target, visitor) {
  *    // obj
  *    // { a : { b : {c : { d : "foo"}}}}
  *
+ *    let obj = {};
+ *    l8.chain([["a", "b.c", "d"]], obj, "foo");
+ *
+ *    // obj
+ *    // { a : { "b.c" : { d : "foo"}}}}
+ *
  * This method lets you pass a list of properties as the first argument that will be chained.
  * The third argument can be a function that gets called with each property upon chaining.
  * The return value of this function is used as the value for the chained property.
@@ -184,10 +190,9 @@ export const visit = function (target, visitor) {
  *
  * @example
  * let obj = {};
- *    l8.chain(["a.b", "e.f"], obj, (chain) => console.log(chain.toUpperCase()));
- *
- *    // obj
- *    // { a : { b : "B"}, {e : {f : "F"}}}
+ * l8.chain(["a.b", "e.f"], obj, (chain) => console.log(chain.toUpperCase()));
+ * // obj
+ * // { a : { b : "B"}, {e : {f : "F"}}}
  *
  *
  * @param {!(String|Array)} chains
@@ -206,7 +211,7 @@ export const chain = function (chains, target = {}, defaultValue = undefined, ov
          * @todo O(n) ?
          */
         const
-            keys = str.split("."),
+            keys = l8.isArray(str) ? str : str.split("."),
             cr = (obj, keys) => {
 
                 let key;
