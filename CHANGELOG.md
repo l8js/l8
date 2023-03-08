@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.12.1](https://github.com/l8js/l8/compare/v0.12.0...v0.12.1) (2023-03-08)
+
+
+### Bug Fixes
+
+* information in arrays containing chains are lost ([da6ea74](https://github.com/l8js/l8/commit/da6ea74b5735e750eaa87d54d33804d3375a3f59))
+
 ## [0.12.0](https://github.com/l8js/l8/compare/v0.11.0...v0.12.0) (2023-03-08)
 
 
